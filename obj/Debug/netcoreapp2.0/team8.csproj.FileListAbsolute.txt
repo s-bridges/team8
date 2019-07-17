@@ -1,0 +1,11 @@
+D:\School\July 2019\CIS477\team8\bin\Debug\netcoreapp2.0\team8.deps.json
+D:\School\July 2019\CIS477\team8\bin\Debug\netcoreapp2.0\team8.runtimeconfig.json
+D:\School\July 2019\CIS477\team8\bin\Debug\netcoreapp2.0\team8.runtimeconfig.dev.json
+d:\School\July 2019\CIS477\team8\bin\Debug\netcoreapp2.0\team8.dll
+d:\School\July 2019\CIS477\team8\bin\Debug\netcoreapp2.0\team8.pdb
+d:\School\July 2019\CIS477\team8\obj\Debug\netcoreapp2.0\team8.csprojResolveAssemblyReference.cache
+d:\School\July 2019\CIS477\team8\obj\Debug\netcoreapp2.0\team8.csproj.CoreCompileInputs.cache
+d:\School\July 2019\CIS477\team8\obj\Debug\netcoreapp2.0\team8.AssemblyInfoInputs.cache
+d:\School\July 2019\CIS477\team8\obj\Debug\netcoreapp2.0\team8.AssemblyInfo.cs
+d:\School\July 2019\CIS477\team8\obj\Debug\netcoreapp2.0\team8.dll
+d:\School\July 2019\CIS477\team8\obj\Debug\netcoreapp2.0\team8.pdb
