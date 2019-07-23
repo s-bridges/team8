@@ -1,0 +1,103 @@
+﻿@model IEnumerable<team8.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h2>All Customers</h2>
+<h4>Customer</h4>
+<p>
+       
+        <a asp-controller="Customer"  asp-action="Create">Create New User</a>        
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerZipcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerUserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPassword)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerZipcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPassword)
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-CustomerID="@item.CustomerID">Edit</a>
+                <a asp-action="Details" asp-route-CustomerID="@item.CustomerID">Details</a>
+                <a asp-action="Delete" asp-route-CustomerID="@item.CustomerID">Delete</a>
+                
+                <a asp-controller="Payment" asp-action="Index" asp-route-CustomerID="@item.CustomerID">Payment Information</a>
+                <a asp-controller="Payment" asp-action="Create" asp-route-CustomerID="@item.CustomerID">New Credit Card</a>
+            </td>
+            
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

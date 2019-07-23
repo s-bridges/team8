@@ -1,0 +1,78 @@
+﻿@model team8.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerFirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerFirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerLastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerState)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerState)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerZipcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerZipcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerUserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPassword)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPassword)
+        </dd>
+
+
+    </dl>
+    <a asp-controller="Payment"asp-action="Index" asp-route-CustomerID ="@Model.CustomerID">Payment Information</a>
+</div>
+<div>
+    
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

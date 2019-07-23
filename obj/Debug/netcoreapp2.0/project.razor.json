@@ -1,5 +1,5 @@
 {
-  "FilePath": "d:\\School\\July 2019\\CIS477\\team8\\team8.csproj",
+  "FilePath": "c:\\Users\\Justin\\Documents\\School\\Senior Project 2\\team8\\team8\\team8.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.0",
     "LanguageVersion": "2.0",
@@ -2726,5 +2726,6 @@
     "CSharpLanguageVersion": 703
   },
   "RootNamespace": null,
-  "Documents": []
+  "Documents": [],
+  "SerializationFormat": "0.1"
 }
