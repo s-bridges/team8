@@ -9,9 +9,9 @@ namespace team8.Models
 {
     public class PaymentDataLayer
     {
-        string connectionString = "Data Source=wscteam8.database.windows.net;Initial Catalog=WSC_Team_8;User ID=Team8;Password=WSCpassword8;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = "Data Source=wscteam8.database.windows.net;Initial Catalog=WSC_Team_8;Persist Security Info=True;User ID=Team8;Password=WSCpassword8";
 
-        
+
         //show all cards for a user
         public IEnumerable<Payment> GetAllCustomerPayment(int CustomerID)
         {

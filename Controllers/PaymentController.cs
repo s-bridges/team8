@@ -11,7 +11,6 @@ namespace team8.Controllers
     public class PaymentController : Controller
     {
         PaymentDataLayer objPayment = new PaymentDataLayer();
-        CustomerDataAccessLayer objCustomer = new CustomerDataAccessLayer();
 
 
         //index page controller
@@ -50,7 +49,7 @@ namespace team8.Controllers
 
                 objPayment.AddPayment(payment);
 
-                return RedirectToAction("Index", new { CustomerID = payment.CustomerID });
+                return RedirectToAction("Index", new { payment.CustomerID });
 
             }
             return View(payment);

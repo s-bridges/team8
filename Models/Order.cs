@@ -14,7 +14,7 @@ namespace team8.Models
         public string PaymentType { get; set; }
 
         public virtual Customer customer { get; set; }
-
+        
         
     }
 }

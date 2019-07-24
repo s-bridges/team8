@@ -10,7 +10,8 @@ namespace team8.Models
     //Data Access Layer for customer information
     public class CustomerDataAccessLayer
     {
-        string connectionString = "Data Source=wscteam8.database.windows.net;Initial Catalog=WSC_Team_8;User ID=Team8;Password=WSCpassword8;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+     
+        string connectionString = "Data Source=wscteam8.database.windows.net;Initial Catalog=WSC_Team_8;User ID=Team8;Password=WSCpassword8;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         //this class displays all of the users in the system as a way to test, 
         //also useful when working witht the ops manager becuase it will show 
@@ -125,15 +126,63 @@ namespace team8.Models
                     customer.CustomerUserName = rdr["CustomerUserName"].ToString();
                     customer.CustomerPassword = rdr["CustomerPassword"].ToString();
                 }
-                               
+
                 return customer;
             }
 
-
-           //delete a customer
-
-          
         }
+        //delete a customer
+
+        //delete Card 
+
+        public void DeleteCustomer(int? CustomerID)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spDeleteCustomer", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("CustomerID", CustomerID);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+
+        //see if a customer may login.
+        public Customer CustomerLogin(string CustomerUserName, string CustomerPassword)
+        {
+            Customer customer = new Customer();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string SqlQuery = "SELECT * FROM Customer WHERE CustomerUserName = '" + CustomerUserName + "' AND CustomerPassword = '" + CustomerPassword + "'";
+                SqlCommand cmd = new SqlCommand(SqlQuery, con);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    customer.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
+                    customer.CustomerFirstName = rdr["CustomerFirstName"].ToString();
+                    customer.CustomerLastName = rdr["CustomerLastName"].ToString();
+                    customer.CustomerAddress = rdr["CustomerAddress"].ToString();
+                    customer.CustomerCity = rdr["CustomerCity"].ToString();
+                    customer.CustomerState = rdr["CustomerState"].ToString();
+                    customer.CustomerZipcode = Convert.ToInt32(rdr["CustomerZipcode"]);
+                    customer.CustomerPhoneNumber = rdr["CustomerPhoneNumber"].ToString();
+                    customer.CustomerUserName = rdr["CustomerUserName"].ToString();
+                    customer.CustomerPassword = rdr["CustomerPassword"].ToString();
+
+                }
+                con.Close();
+            }
+            return customer;
+        }
+
+
 
     }
 }

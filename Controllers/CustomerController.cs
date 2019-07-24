@@ -11,17 +11,42 @@ namespace team8.Controllers
     {
         //index page
         CustomerDataAccessLayer objCustomer = new CustomerDataAccessLayer();
-        
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(int? CustomerID)
         {
-            List<Customer> lstCustomer = new List<Customer>();
-            lstCustomer = objCustomer.GetAllCustomers().ToList();
+            if (CustomerID == null)
+            {
+                return RedirectToAction("CustomerLogin");
+            }
 
+            Customer customer = objCustomer.GetCustomerData(CustomerID);
 
-            return View(lstCustomer);
+            return View(customer);
+
         }
         
+        
+        //this is to get login info
+
+        public IActionResult CustomerLogin()
+        {
+            return View();
+        }
+        
+        //check the login and return the customerID for use by payment and order controller
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CustomerLogin(string CustomerUserName, string CustomerPassword, [Bind]Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                objCustomer.CustomerLogin(CustomerUserName, CustomerPassword);
+                return RedirectToAction("Index");
+            }
+            
+            return RedirectToAction("Index");
+        }
 
         //create customer
 
@@ -122,6 +147,19 @@ namespace team8.Controllers
            // objCustomer.DeleteCustomer(CustomerID);
             return RedirectToAction("Index");
 
+        }
+
+        [HttpGet]
+        public IActionResult ViewAllCustomers()
+        {
+
+            {
+                List<Customer> lstCustomer = new List<Customer>();
+                lstCustomer = objCustomer.GetAllCustomers().ToList();
+
+
+                return View(lstCustomer);
+            }
         }
     }
 }
