@@ -28,7 +28,7 @@ namespace team8.Controllers
         
         
         //this is to get login info
-
+        [HttpGet]
         public IActionResult CustomerLogin()
         {
             return View();
@@ -37,12 +37,23 @@ namespace team8.Controllers
         //check the login and return the customerID for use by payment and order controller
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CustomerLogin(string CustomerUserName, string CustomerPassword, [Bind]Customer customer)
+        public IActionResult CustomerLogin(string CustomerUserName, string CustomerPassword)
         {
             if (ModelState.IsValid)
             {
-                objCustomer.CustomerLogin(CustomerUserName, CustomerPassword);
-                return RedirectToAction("Index");
+                
+                Customer customer = objCustomer.CustomerLogin(CustomerUserName, CustomerPassword);
+
+                if (customer.CustomerID != 0)
+                {
+
+                    return RedirectToAction("Index", new { customer.CustomerID });
+
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             
             return RedirectToAction("Index");
@@ -96,7 +107,7 @@ namespace team8.Controllers
             if (ModelState.IsValid)
             {
                 objCustomer.UpdateCustomer(customer);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {customer.CustomerID });
             }
             return View(customer);
         }

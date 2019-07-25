@@ -157,7 +157,7 @@ namespace team8.Models
             Customer customer = new Customer();
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string SqlQuery = "SELECT * FROM Customer WHERE CustomerUserName = '" + CustomerUserName + "' AND CustomerPassword = '" + CustomerPassword + "'";
+                string SqlQuery = "SELECT CustomerID FROM Customer WHERE CustomerUserName = '" + CustomerUserName + "' AND CustomerPassword = '" + CustomerPassword + "'";
                 SqlCommand cmd = new SqlCommand(SqlQuery, con);
 
                 con.Open();
@@ -166,20 +166,15 @@ namespace team8.Models
                 while (rdr.Read())
                 {
                     customer.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
-                    customer.CustomerFirstName = rdr["CustomerFirstName"].ToString();
-                    customer.CustomerLastName = rdr["CustomerLastName"].ToString();
-                    customer.CustomerAddress = rdr["CustomerAddress"].ToString();
-                    customer.CustomerCity = rdr["CustomerCity"].ToString();
-                    customer.CustomerState = rdr["CustomerState"].ToString();
-                    customer.CustomerZipcode = Convert.ToInt32(rdr["CustomerZipcode"]);
-                    customer.CustomerPhoneNumber = rdr["CustomerPhoneNumber"].ToString();
-                    customer.CustomerUserName = rdr["CustomerUserName"].ToString();
-                    customer.CustomerPassword = rdr["CustomerPassword"].ToString();
 
                 }
-                con.Close();
+                
             }
-            return customer;
+
+                return customer;
+            
+
+            
         }
 
 

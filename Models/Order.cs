@@ -10,6 +10,7 @@ namespace team8.Models
     {
         [Key]
         public int OrderID { get; set; }
+
         public int CustomerID { get; set; }
         public string PaymentType { get; set; }
 

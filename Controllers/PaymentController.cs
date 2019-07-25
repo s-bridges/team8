@@ -21,7 +21,8 @@ namespace team8.Controllers
 
             List<Payment> lstPayment = new List<Payment>();
             lstPayment = objPayment.GetAllCustomerPayment(CustomerID).ToList();
-            
+
+
             return View(lstPayment);
         }
 
@@ -49,7 +50,7 @@ namespace team8.Controllers
 
                 objPayment.AddPayment(payment);
 
-                return RedirectToAction("Index", new { payment.CustomerID });
+                return RedirectToAction("Index", new {payment.CustomerID});
 
             }
             return View(payment);
@@ -82,6 +83,7 @@ namespace team8.Controllers
             if (ModelState.IsValid)
             {
                 objPayment.UpdatePayment(payment);
+                return RedirectToAction("Index", new { payment.CustomerID });
             }
             return View(payment);
         }

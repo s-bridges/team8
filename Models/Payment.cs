@@ -25,7 +25,7 @@ namespace team8.Models
         public string CardExpDate { get; set; }
         public string CardCVV { get; set; }
 
-        
+        public virtual Customer customer { get; set; }
     }
 
 }
