@@ -35,6 +35,9 @@
                     @Html.DisplayNameFor(model => model.BillingZipcode)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.CardNumber)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.CardType)
                 </th>
                 <th>
@@ -71,6 +74,9 @@
                         @Html.DisplayFor(modelItem => item.BillingZipcode)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.CardNumber)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.CardType)
                     </td>
                     <td>
@@ -91,10 +97,14 @@
             }
         </tbody>
     </table>
-   
 
 </div>
-
-        @section Scripts {
+<div>
+    <a asp-controller="Customer" asp-action="Index" asp-route-CustomerID="@Model.First().CustomerID">Back to My Account</a>
+</div>
+<div>
+    <a asp-controller="Payment" asp-action="Create" asp-route-CustomerID="@Model.First().CustomerID">Add New Payment Method</a>
+</div>
+ @section Scripts {
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
         }

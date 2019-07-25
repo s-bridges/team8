@@ -13,42 +13,47 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CustomerID" />
             <div class="form-group">
-                <label asp-for="BillingAddress" class="control-label"></label>
+                <label asp-for="BillingAddress" class="control-label">Address</label>
                 <input asp-for="BillingAddress" class="form-control" />
                 <span asp-validation-for="BillingAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BillingCity" class="control-label"></label>
+                <label asp-for="BillingCity" class="control-label">City</label>
                 <input asp-for="BillingCity" class="form-control" />
                 <span asp-validation-for="BillingCity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BillingSTate" class="control-label"></label>
+                <label asp-for="BillingSTate" class="control-label">State</label>
                 <input asp-for="BillingSTate" class="form-control" />
                 <span asp-validation-for="BillingSTate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BillingZipcode" class="control-label"></label>
+                <label asp-for="BillingZipcode" class="control-label">zipcode</label>
                 <input asp-for="BillingZipcode" class="form-control" />
                 <span asp-validation-for="BillingZipcode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CardType" class="control-label"></label>
+                <label asp-for="CardNumber" class="control-label">Creditcard Number</label>
+                <input asp-for="CardNumber" class="form-control" />
+                <span asp-validation-for="CardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardType" class="control-label">Type</label>
                 <input asp-for="CardType" class="form-control" />
                 <span asp-validation-for="CardType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CardName" class="control-label"></label>
+                <label asp-for="CardName" class="control-label">Name on Card</label>
                 <input asp-for="CardName" class="form-control" />
                 <span asp-validation-for="CardName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CardExpDate" class="control-label"></label>
+                <label asp-for="CardExpDate" class="control-label">Experation Date</label>
                 <input asp-for="CardExpDate" class="form-control" />
                 <span asp-validation-for="CardExpDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CardCVV" class="control-label"></label>
+                <label asp-for="CardCVV" class="control-label">CVV</label>
                 <input asp-for="CardCVV" class="form-control" />
                 <span asp-validation-for="CardCVV" class="text-danger"></span>
             </div>
@@ -60,7 +65,6 @@
 </div>
 
 <div>
-
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

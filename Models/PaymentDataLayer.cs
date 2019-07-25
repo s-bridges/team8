@@ -38,6 +38,8 @@ namespace team8.Models
                     payment.BillingCity = rdr["BillingCity"].ToString();
                     payment.BillingSTate = rdr["BillingSTate"].ToString();
                     payment.BillingZipcode = rdr["BillingZipcode"].ToString();
+                    payment.CardNumber = Convert.ToInt32(rdr["CardNumber"]);
+
                     payment.CardType = rdr["CardType"].ToString();
                     payment.CardName = rdr["CardName"].ToString();
                     payment.CardExpDate = rdr["CardExpDate"].ToString();
@@ -71,6 +73,7 @@ namespace team8.Models
                 cmd.Parameters.AddWithValue("@BillingCity", payment.BillingCity);
                 cmd.Parameters.AddWithValue("@BillingSTate", payment.BillingSTate);
                 cmd.Parameters.AddWithValue("@BillingZipcode", payment.BillingZipcode);
+                cmd.Parameters.AddWithValue("@CardNumber", payment.CardNumber);
                 cmd.Parameters.AddWithValue("@CardType", payment.CardType);
                 cmd.Parameters.AddWithValue("@CardName", payment.CardName);
                 cmd.Parameters.AddWithValue("@CardExpDate", payment.CardExpDate);
@@ -98,6 +101,7 @@ namespace team8.Models
                 cmd.Parameters.AddWithValue("@BillingCity", payment.BillingCity);
                 cmd.Parameters.AddWithValue("@BillingSTate", payment.BillingSTate);
                 cmd.Parameters.AddWithValue("@BillingZipcode", payment.BillingZipcode);
+                cmd.Parameters.AddWithValue("@CardNumber", payment.CardNumber);
                 cmd.Parameters.AddWithValue("@CardType", payment.CardType);
                 cmd.Parameters.AddWithValue("@CardName", payment.CardName);
                 cmd.Parameters.AddWithValue("@CardExpDate", payment.CardExpDate);
@@ -133,10 +137,11 @@ namespace team8.Models
                     payment.BillingCity = rdr["BillingCity"].ToString();
                     payment.BillingSTate = rdr["BillingSTate"].ToString();
                     payment.BillingZipcode = rdr["BillingZipcode"].ToString();
+                    payment.CardNumber = Convert.ToInt32(rdr["CardNumber"]);
                     payment.CardType = rdr["CardType"].ToString();
                     payment.CardName = rdr["CardName"].ToString();
                     payment.CardExpDate = rdr["CardExpDate"].ToString();
-                    payment.CardCVV = payment.CardCVV = rdr["CardCVV"].ToString();
+                    payment.CardCVV =  rdr["CardCVV"].ToString();
 
                     
                 }

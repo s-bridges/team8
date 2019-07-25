@@ -1,0 +1,66 @@
+﻿@model IEnumerable<team8.Models.Order>
+
+
+
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h2>Orders</h2>
+<h4>All Orders </h4>
+
+<div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaymentType)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentType)
+                    </td>
+
+                    <td>                        
+                        <a asp-action="Details" asp-route-CardID="@item.OrderID">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<div>
+    <a asp-controller="Customer" asp-action="Index" >Back to My Account</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

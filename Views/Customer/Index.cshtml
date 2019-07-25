@@ -12,11 +12,12 @@
     <h4>Customer</h4>
     <hr />
     <div>
-        <a asp-controller="Payment" asp-action="Index" asp-route-CustomerID="@Model.CustomerID">Payment Information</a>
+        <a asp-controller="Order" asp-action="Index" asp-route-CustomerID="@Model.CustomerID">My Orders</a>
     </div>
     <div>
-        <a asp-controller="Payment" asp-action="Create" asp-route-CustomerID="@Model.CustomerID">Add New Payment Method</a>
+        <a asp-controller="Payment" asp-action="Index" asp-route-CustomerID="@Model.CustomerID">Payment Information</a>
     </div>
+
 </div>
 
 @section Scripts {

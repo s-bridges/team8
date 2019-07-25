@@ -10,8 +10,12 @@ namespace team8.Models
     {
         [Key]
         public int CatalogID { get; set; }
+
+        public string ItemPhoto { get; set; }
         public string ItemName { get; set; }
         public string ItemStock { get; set; }
         public string ItemPrice { get; set; }
+
+        public virtual Order_Catalog order_catalog { get; set; }
     }
 }

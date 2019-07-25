@@ -1,0 +1,70 @@
+﻿@model IEnumerable<team8.Models.Catalog>
+
+
+
+
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<h2>Product Catalog</h2>
+<h4>All Products</h4>
+
+<div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CatalogID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ItemName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ItemPhoto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ItemStock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ItemPrice)
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CatalogID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+
+                <td>
+                    <img src="data:image/jpeg;base64,@item.ItemPhoto" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemPrice)
+                </td>
+
+
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
