@@ -15,18 +15,14 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CatalogID)
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.ItemName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ItemPhoto)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ItemStock)
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.ItemPrice)
                 </th>
@@ -38,19 +34,15 @@
             @foreach (var item in Model)
             {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CatalogID)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.ItemName)
                 </td>
 
                 <td>
-                    <img src="data:image/jpeg;base64,@item.ItemPhoto" />
+                    <img src= "@item.ItemPhoto" height="120" width="120"/>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ItemStock)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.ItemPrice)
                 </td>
@@ -58,7 +50,7 @@
 
             </tr>
             }
-        </tbody>
+        </tbody> 
     </table>
 
 </div>
