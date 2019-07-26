@@ -1,0 +1,24 @@
+﻿@model team8.Models.Order_Catalog
+
+
+@{
+    ViewData["Title"] = "My Cart";
+}
+
+<h2>Add to Cart</h2>
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+    </dl>
+   
+</div>
+<div>
+
+    <a asp-controller="Catalog" asp-action="Index">Back to Products</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

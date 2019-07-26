@@ -21,7 +21,7 @@ namespace team8.Controllers
             }
 
             Customer customer = objCustomer.GetCustomerData(CustomerID);
-
+            
             return View(customer);
 
         }

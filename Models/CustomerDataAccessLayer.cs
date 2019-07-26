@@ -166,7 +166,7 @@ namespace team8.Models
                 while (rdr.Read())
                 {
                     customer.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
-
+                    
                 }
                 
             }

@@ -11,7 +11,6 @@ namespace team8.Models
     {
         [Key]
         public int CustomerID { get; set; }
-
         public string CustomerFirstName { get; set; }
         public string CustomerLastName { get; set; }
 

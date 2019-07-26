@@ -1,4 +1,4 @@
-﻿using System;
+﻿   using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +22,10 @@ namespace team8.Controllers
             List<Payment> lstPayment = new List<Payment>();
             lstPayment = objPayment.GetAllCustomerPayment(CustomerID).ToList();
 
+            if (lstPayment.Count == 0)
+            {
+                return NotFound();
+            }
 
             return View(lstPayment);
         }

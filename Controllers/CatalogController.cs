@@ -21,5 +21,23 @@ namespace team8.Controllers
 
             return View(lstCatalog);
         }
+
+        [HttpGet]
+        public IActionResult Details(int? CatalogID)
+        {
+            if (CatalogID == null)
+            {
+                return NotFound();
+            }
+
+            Catalog catalog = objCatalog.GetOrderCatalog(CatalogID);
+            
+            if (catalog == null)    
+            {
+                return NotFound();
+            }
+
+            return View(catalog);
+        }
     }
 }

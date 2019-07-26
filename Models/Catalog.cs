@@ -14,7 +14,6 @@ namespace team8.Models
         public string ItemPhoto { get; set; }
         public string ItemName { get; set; }
         public string ItemStock { get; set; }
-        [DataType(DataType.Currency)]
         public string ItemPrice { get; set; }
 
         public virtual Order_Catalog order_catalog { get; set; }

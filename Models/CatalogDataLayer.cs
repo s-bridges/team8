@@ -36,7 +36,6 @@ namespace team8.Models
                     catalog.ItemName = rdr["ItemName"].ToString();
                     //get the image
                     catalog.ItemPhoto = rdr["ItemPhoto"].ToString();
-                    //convert to 64
 
                     catalog.ItemStock = rdr["ItemStock"].ToString();
                     catalog.ItemPrice = rdr["ItemPrice"].ToString();
@@ -67,11 +66,8 @@ namespace team8.Models
                 {
                     catalog.CatalogID = Convert.ToInt32(rdr["CatalogID"]);
                     catalog.ItemName = rdr["ItemName"].ToString();
-                    //get the image
-                    byte[] photo = ((byte[])(rdr["ItemPhoto"]));
-                    //convert to 64
-                    catalog.ItemPhoto = Convert.ToBase64String(photo);
-                    //format the string
+                    //get the image as a url string - imgsrc = url  view
+                    catalog.ItemPhoto = rdr["ItemPhoto"].ToString();
 
                     catalog.ItemStock = rdr["ItemStock"].ToString();
                     catalog.ItemPrice = rdr["ItemPrice"].ToString();
