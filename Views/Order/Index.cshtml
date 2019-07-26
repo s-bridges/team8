@@ -57,7 +57,13 @@
 
 </div>
 <div>
-    <a asp-controller="Customer" asp-action="Index" >Back to My Account</a>
+    <button onclick="goBack()">Return to My Account</button>
+
+    <script>
+                function goBack() {
+                    window.history.back();
+                }
+    </script>
 </div>
 
 @section Scripts {
