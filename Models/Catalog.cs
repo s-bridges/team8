@@ -16,6 +16,6 @@ namespace team8.Models
         public string ItemStock { get; set; }
         public string ItemPrice { get; set; }
 
-        public virtual Order_Catalog order_catalog { get; set; }
+        public virtual Order order { get; set; }
     }
 }

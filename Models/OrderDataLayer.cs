@@ -31,8 +31,14 @@ namespace team8.Models
 
                     order.OrderID = Convert.ToInt32(rdr["OrderID"]);
                     order.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
+                    order.CatalogID = Convert.ToInt32(rdr["CatalogID"]);
+                    order.JobType = rdr["JobType"].ToString();
+                    order.Media = rdr["Media"].ToString();
+                    order.Content = rdr["Content"].ToString();
+                    order.Quantity = Convert.ToInt32(rdr["Quantity"]);
+                    order.Total = Convert.ToInt32(rdr["Total"]);
                     order.OrderStatus = rdr["OrderStatus"].ToString();
-                    order.PaymentType = rdr["PaymentType"].ToString();
+                    order.PaymentType = rdr["PaymentType"].ToString();                 
 
 
                     lstOrder.Add(order);
@@ -61,8 +67,7 @@ namespace team8.Models
                 {
                     order.OrderID = Convert.ToInt32(rdr["OrderID"]);
                     order.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
-                    order.OrderStatus = rdr["OrderStatus"].ToString();
-                    order.PaymentType = rdr["PaymentType"].ToString();
+
 
 
                 }
@@ -70,6 +75,7 @@ namespace team8.Models
             return order;
 
         }
+       
 
 
     }

@@ -10,16 +10,20 @@ namespace team8.Models
     {
         [Key]
         public int OrderID { get; set; }
-
+        public int CatalogID { get; set; }
         public int CustomerID { get; set; }
+        public string JobType{ get; set; }
 
+        public string Media { get; set; }
+
+        public string Content { get; set; }
+        public int Quantity { get; set; }
+        public int Total { get; set; }
         public string OrderStatus { get; set; }
         public string PaymentType { get; set; }
 
-
         public virtual Customer customer { get; set; }
-        
-        
+        public ICollection<Catalog> Catalog { get; set; }
     }
 
 

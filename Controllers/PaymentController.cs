@@ -22,12 +22,16 @@ namespace team8.Controllers
             List<Payment> lstPayment = new List<Payment>();
             lstPayment = objPayment.GetAllCustomerPayment(CustomerID).ToList();
 
-            if (lstPayment.Count == 0)
+            if (lstPayment != null)
             {
-                return NotFound();
+                TempData["CustomerID"] = CustomerID;
+                return View(lstPayment);
             }
-
-            return View(lstPayment);
+            else
+            {
+                return View();
+            }
+            
         }
 
                             
@@ -39,7 +43,11 @@ namespace team8.Controllers
             if (CustomerID == null)
             { return NotFound(); }
 
-            return View();
+            Payment payment = new Payment();
+            payment.CustomerID = CustomerID;
+            TempData["CustomerID"] = CustomerID;
+
+            return View(payment);
             
         }
 

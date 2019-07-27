@@ -22,6 +22,24 @@
                     @Html.DisplayNameFor(model => model.CustomerID)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.CatalogID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Media)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.OrderStatus)
                 </th>
                 <th>
@@ -33,37 +51,50 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderStatus)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PaymentType)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CatalogID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Media)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentType)
+                </td>
 
-                    <td>                        
-                        <a asp-action="Details" asp-route-CardID="@item.OrderID">Details</a>
-                    </td>
-                </tr>
+                <td>
+                    <a asp-action="Details" asp-route-CardID="@item.OrderID">Details</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 
 </div>
 <div>
-    <button onclick="goBack()">Return to My Account</button>
+    <a asp-controller="Customer" asp-action="Index" asp-route-CustomerID="@TempData["CustomerID"]">Return to My Account</a>
 
-    <script>
-                function goBack() {
-                    window.history.back();
-                }
-    </script>
 </div>
 
 @section Scripts {

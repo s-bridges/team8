@@ -23,6 +23,8 @@ namespace team8.Controllers
 
             if (lstOrder != null)
             {
+                TempData["CustomerID"] = CustomerID;
+
                 return View(lstOrder);
             }
 
@@ -30,7 +32,7 @@ namespace team8.Controllers
             {
                 return View();
             }
-            
+
         }
 
         //show details for one order
@@ -43,7 +45,7 @@ namespace team8.Controllers
             }
 
             Order order = objOrder.GetOrderData(OrderID);
-            
+
 
             if (order == null)
             {
@@ -51,6 +53,18 @@ namespace team8.Controllers
             }
 
             return View(order);
+        }
+
+        [HttpGet]
+        public IActionResult Create(int? CatalogID)
+        {
+            if (Session.CustomerID == 0)
+            {
+                return RedirectToAction("CustomerLogin");
+            }
+            
+
+            return View();
         }
     }
 }

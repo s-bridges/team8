@@ -60,17 +60,13 @@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-            <button onclick="goBack()">Return to Payment Information</button>
 
-            <script>
-                function goBack() {
-                    window.history.back();
-                }
-            </script>
+            <div>
+                <a asp-controller="Payment" asp-action="Index" asp-route-CustomerID="@TempData["CustomerID"]">Return To List</a>
+            </div>
         </form>
-
     </div>
-
+</div>
 <div>
 </div>
 @section Scripts {

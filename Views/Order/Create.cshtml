@@ -1,0 +1,31 @@
+﻿@model team8.Models.Order
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Create New Payment Method</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="CustomerID" />
+            <input type="hidden" asp-for="CatalogID">
+            <div class="form-group">
+                <select Job Type="JobType">
+                    <option value="Print">Print</option>
+                    <option value="Engraving">Engraving</option>
+                </select>
+            </div>
+
+        </form>
+    </div>
+</div>
+<div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

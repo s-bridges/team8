@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
 using team8.Models;
+
 
 namespace team8.Controllers
 {
@@ -11,16 +13,19 @@ namespace team8.Controllers
     {
         //index page
         CustomerDataAccessLayer objCustomer = new CustomerDataAccessLayer();
-
         [HttpGet]
         public IActionResult Index(int? CustomerID)
         {
-            if (CustomerID == null)
+            if (Session.CustomerID == 0)
             {
                 return RedirectToAction("CustomerLogin");
             }
 
+            CustomerID = Session.CustomerID;
             Customer customer = objCustomer.GetCustomerData(CustomerID);
+            if (customer != null)
+            {
+            }
             
             return View(customer);
 
@@ -46,9 +51,8 @@ namespace team8.Controllers
 
                 if (customer.CustomerID != 0)
                 {
-
-                    return RedirectToAction("Index", new { customer.CustomerID });
-
+                    Session.CustomerID = customer.CustomerID;
+                    return RedirectToAction("Index", new { customer.CustomerID});
                 }
                 else
                 {
