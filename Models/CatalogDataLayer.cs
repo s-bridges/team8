@@ -38,7 +38,7 @@ namespace team8.Models
                     catalog.ItemPhoto = rdr["ItemPhoto"].ToString();
 
                     catalog.ItemStock = rdr["ItemStock"].ToString();
-                    catalog.ItemPrice = rdr["ItemPrice"].ToString();
+                    catalog.ItemPrice = Convert.ToDecimal(rdr["ItemPrice"]);
 
                     
                     lstCatalog.Add(catalog);
@@ -70,9 +70,30 @@ namespace team8.Models
                     catalog.ItemPhoto = rdr["ItemPhoto"].ToString();
 
                     catalog.ItemStock = rdr["ItemStock"].ToString();
-                    catalog.ItemPrice = rdr["ItemPrice"].ToString();
+                    catalog.ItemPrice = Convert.ToDecimal(rdr["ItemPrice"]);
 
 
+                }
+            }
+            return catalog;
+
+        }
+        public Catalog GetItemPrice(int? CatalogID)
+        {
+
+            Catalog catalog = new Catalog();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string SqlQuery = "SELECT ItemPrice FROM ItemCatalog WHERE CatalogID = " + CatalogID;
+
+                SqlCommand cmd = new SqlCommand(SqlQuery, con);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    catalog.ItemPrice = Convert.ToDecimal(rdr["ItemPrice"]);
                 }
             }
             return catalog;

@@ -1,7 +1,7 @@
 ﻿@model team8.Models.Customer
 
 @{
-    ViewData["Title"] = "Delete User";
+    ViewData["Title"] = "Delete";
 }
 
 <h2>Delete</h2>
@@ -68,6 +68,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="CustomerID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-controller="Customer"asp-action="ViewAllCustomers">Back to List</a>
     </form>
 </div>   

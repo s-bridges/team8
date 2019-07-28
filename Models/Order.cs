@@ -18,7 +18,7 @@ namespace team8.Models
 
         public string Content { get; set; }
         public int Quantity { get; set; }
-        public int Total { get; set; }
+        public decimal Total { get; set; }
         public string OrderStatus { get; set; }
         public string PaymentType { get; set; }
 

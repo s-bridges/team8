@@ -14,7 +14,7 @@ namespace team8.Models
         public string ItemPhoto { get; set; }
         public string ItemName { get; set; }
         public string ItemStock { get; set; }
-        public string ItemPrice { get; set; }
+        public decimal ItemPrice { get; set; }
 
         public virtual Order order { get; set; }
     }

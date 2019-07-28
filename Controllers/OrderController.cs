@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using team8.Models;
 
 
+
 namespace team8.Controllers
 {
     public class OrderController : Controller
     {
         OrderDataLayer objOrder = new OrderDataLayer();
+        CatalogDataLayer objCatalog = new CatalogDataLayer();
 
 
 
@@ -55,16 +57,53 @@ namespace team8.Controllers
             return View(order);
         }
 
+       
         [HttpGet]
         public IActionResult Create(int? CatalogID)
         {
+            if (CatalogID == null )
+            {
+                return NotFound();
+            }
+                       
+            
             if (Session.CustomerID == 0)
             {
-                return RedirectToAction("CustomerLogin");
-            }
-            
+                TempData["URL"] = Request.Path.ToString();
+                return RedirectToAction("Index", "Login");
 
-            return View();
+            }
+
+            Order order = new Order();
+            order.CustomerID = Session.CustomerID;
+            order.CatalogID = Convert.ToInt32(CatalogID);
+
+            TempData["CustomerID"] = Session.CustomerID;
+
+            
+            return View(order);
+        }
+        [HttpPost]
+        public IActionResult Create(int CatalogID,[Bind]Order order)
+        {
+
+            Catalog catalog = objCatalog.GetItemPrice(CatalogID);
+            decimal itemPrice = Convert.ToDecimal(catalog.ItemPrice);
+            int quantity = Convert.ToInt32(order.Quantity);
+
+            if (ModelState.IsValid)
+            {
+                //if (order.PaymentType == "PODelivery")
+                //{
+                //   logic for the 10% down on podelivery on credit card
+                //}
+
+                order.Total = Convert.ToDecimal(quantity * itemPrice);
+
+                objOrder.AddOrder(order);
+                return RedirectToAction("Index", "Customer", new { order.CustomerID });
+            }
+            return View(order);
         }
     }
 }

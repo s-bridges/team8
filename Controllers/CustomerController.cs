@@ -18,7 +18,7 @@ namespace team8.Controllers
         {
             if (Session.CustomerID == 0)
             {
-                return RedirectToAction("CustomerLogin");
+                return RedirectToAction("Index", "Login");
             }
 
             CustomerID = Session.CustomerID;
@@ -29,39 +29,9 @@ namespace team8.Controllers
             
             return View(customer);
 
-        }
+        }        
         
-        
-        //this is to get login info
-        [HttpGet]
-        public IActionResult CustomerLogin()
-        {
-            return View();
-        }
-        
-        //check the login and return the customerID for use by payment and order controller
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CustomerLogin(string CustomerUserName, string CustomerPassword)
-        {
-            if (ModelState.IsValid)
-            {
-                
-                Customer customer = objCustomer.CustomerLogin(CustomerUserName, CustomerPassword);
 
-                if (customer.CustomerID != 0)
-                {
-                    Session.CustomerID = customer.CustomerID;
-                    return RedirectToAction("Index", new { customer.CustomerID});
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            
-            return RedirectToAction("Index");
-        }
 
         //create customer
 
@@ -79,6 +49,7 @@ namespace team8.Controllers
             if (ModelState.IsValid)
             {
                 objCustomer.AddCustomer(customer);
+                Session.CustomerID = customer.CustomerID;
                 return RedirectToAction("Index");
 
             }
@@ -155,12 +126,12 @@ namespace team8.Controllers
         }
         //confirm delete
 
-        [HttpPost, ActionName("DeleteCustomer")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? CustomerID)
         {
-           // objCustomer.DeleteCustomer(CustomerID);
-            return RedirectToAction("Index");
+            objCustomer.DeleteCustomer(CustomerID);
+            return RedirectToAction("ViewAllCustomers","Customer");
 
         }
 

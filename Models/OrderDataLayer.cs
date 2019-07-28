@@ -36,7 +36,7 @@ namespace team8.Models
                     order.Media = rdr["Media"].ToString();
                     order.Content = rdr["Content"].ToString();
                     order.Quantity = Convert.ToInt32(rdr["Quantity"]);
-                    order.Total = Convert.ToInt32(rdr["Total"]);
+                    order.Total = Convert.ToDecimal(rdr["Total"]);
                     order.OrderStatus = rdr["OrderStatus"].ToString();
                     order.PaymentType = rdr["PaymentType"].ToString();                 
 
@@ -67,6 +67,14 @@ namespace team8.Models
                 {
                     order.OrderID = Convert.ToInt32(rdr["OrderID"]);
                     order.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
+                    order.CatalogID = Convert.ToInt32(rdr["CatalogID"]);
+                    order.JobType = rdr["JobType"].ToString();
+                    order.Media = rdr["Media"].ToString();
+                    order.Content = rdr["Content"].ToString();
+                    order.Quantity = Convert.ToInt32(rdr["Quantity"]);
+                    order.Total = Convert.ToDecimal(rdr["Total"]);
+                    order.OrderStatus = rdr["OrderStatus"].ToString();
+                    order.PaymentType = rdr["PaymentType"].ToString();
 
 
 
@@ -74,6 +82,29 @@ namespace team8.Models
             }
             return order;
 
+        }
+
+        public void AddOrder(Order order)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spAddOrder", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@CustomerID", order.CustomerID);
+                cmd.Parameters.AddWithValue("@CatalogID", order.CatalogID);
+                cmd.Parameters.AddWithValue("@JobType", order.JobType);
+                cmd.Parameters.AddWithValue("@Media", order.Media);
+                cmd.Parameters.AddWithValue("@Content", order.Content);
+                cmd.Parameters.AddWithValue("@Quantity", order.Quantity);
+                cmd.Parameters.AddWithValue("@Total", order.Total);
+                cmd.Parameters.AddWithValue("@OrderStatus", order.OrderStatus);
+                cmd.Parameters.AddWithValue("@PaymentType", order.PaymentType);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
         }
        
 

@@ -142,7 +142,7 @@ namespace team8.Models
                 SqlCommand cmd = new SqlCommand("spDeleteCustomer", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("CustomerID", CustomerID);
+                cmd.Parameters.AddWithValue("@CustomerID", CustomerID);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -151,31 +151,7 @@ namespace team8.Models
             }
         }
 
-        //see if a customer may login.
-        public Customer CustomerLogin(string CustomerUserName, string CustomerPassword)
-        {
-            Customer customer = new Customer();
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string SqlQuery = "SELECT CustomerID FROM Customer WHERE CustomerUserName = '" + CustomerUserName + "' AND CustomerPassword = '" + CustomerPassword + "'";
-                SqlCommand cmd = new SqlCommand(SqlQuery, con);
 
-                con.Open();
-                SqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    customer.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
-                    
-                }
-                
-            }
-
-                return customer;
-            
-
-            
-        }
 
 
 
