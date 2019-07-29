@@ -1,0 +1,81 @@
+﻿@model team8.Models.Checkout
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>New Order Request</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <h4>@Html.DisplayFor(model => model.catalog.ItemName)</h4>
+            <hr />
+            <dl class="dl-horizontal">
+
+                <dd>
+                    <img src="@Html.DisplayFor(model => model.catalog.ItemPhoto)" height="200" width="200" />
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.catalog.ItemPrice)
+                </dd>
+
+            </dl>
+
+            <input type="hidden" asp-for="order.CustomerID" />
+            <input type="hidden" asp-for="order.CatalogID">
+
+            <div class="form-group">
+                <label asp-for="order.JobType" class="control-label">Job Type</label>
+                <select asp-for="order.JobType" name="order.JobType">
+                    <option>- Please select a type -</option>
+                    <option value="Print">Print</option>
+                    <option value="Engraving">Engraving</option>
+                </select>
+            </div>
+
+            <div class="form-group">   
+                <label asp-for="order.Media" class="control-label">Media</label>
+                <input asp-for="order.Media" class="form-control" />
+                <span asp-validation-for="order.Media" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="order.Content" class="control-label">Content</label>
+                <input asp-for="order.Content" class="form-control" />
+                <span asp-validation-for="order.Content" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="order.Quantity" class="control-label">Quantity</label>
+                <input asp-for="order.Quantity" class="form-control" />
+                <span asp-validation-for="order.Quantity" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="order.OrderStatus" value="Pending" />
+            
+           
+            <div class="form-group">
+                <label asp-for="order.PaymentType" class="control-label">Payment Type</label>
+                <select asp-for="order.PaymentType" name="order.PaymentType">
+                    <option>- Please select a type -</option>
+                    <option value="PODelivery">Payment on Delivery</option>
+                    <option value="Existing Card">Exsisting Credit Card</option>
+                </select>
+            </div>
+                       
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

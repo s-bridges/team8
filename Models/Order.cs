@@ -23,6 +23,7 @@ namespace team8.Models
         public string PaymentType { get; set; }
 
         public virtual Customer customer { get; set; }
+        public virtual Catalog catalog { get; set; }
         public ICollection<Catalog> Catalog { get; set; }
     }
 

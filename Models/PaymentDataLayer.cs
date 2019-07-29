@@ -115,7 +115,7 @@ namespace team8.Models
         }
 
 
-        //Every card linked to a customer
+        //Get card details
         public Payment GetPaymentData(int? CardID)
         {
             

@@ -84,22 +84,22 @@ namespace team8.Models
 
         }
 
-        public void AddOrder(Order order)
+        public void AddOrder(Checkout checkout)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("spAddOrder", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@CustomerID", order.CustomerID);
-                cmd.Parameters.AddWithValue("@CatalogID", order.CatalogID);
-                cmd.Parameters.AddWithValue("@JobType", order.JobType);
-                cmd.Parameters.AddWithValue("@Media", order.Media);
-                cmd.Parameters.AddWithValue("@Content", order.Content);
-                cmd.Parameters.AddWithValue("@Quantity", order.Quantity);
-                cmd.Parameters.AddWithValue("@Total", order.Total);
-                cmd.Parameters.AddWithValue("@OrderStatus", order.OrderStatus);
-                cmd.Parameters.AddWithValue("@PaymentType", order.PaymentType);
+                cmd.Parameters.AddWithValue("@CustomerID", checkout.order.CustomerID);
+                cmd.Parameters.AddWithValue("@CatalogID", checkout.order.CatalogID);
+                cmd.Parameters.AddWithValue("@JobType", checkout.order.JobType);
+                cmd.Parameters.AddWithValue("@Media", checkout.order.Media);
+                cmd.Parameters.AddWithValue("@Content", checkout.order.Content);
+                cmd.Parameters.AddWithValue("@Quantity", checkout.order.Quantity);
+                cmd.Parameters.AddWithValue("@Total", checkout.order.Total);
+                cmd.Parameters.AddWithValue("@OrderStatus", checkout.order.OrderStatus);
+                cmd.Parameters.AddWithValue("@PaymentType", checkout.order.PaymentType);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
