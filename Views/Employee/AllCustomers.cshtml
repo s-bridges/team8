@@ -1,0 +1,66 @@
+﻿@model IEnumerable<team8.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h2>All Customers</h2>
+<p>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerUserName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerUserName)
+                </td>
+                <td>
+
+                    <a asp-controller="Employee" asp-action="CustomerDetails" asp-route-CustomerID="@item.CustomerID">Details</a>                    
+                    
+                    <a asp-controller="Employee" asp-action="CustomerDelete" asp-route-CustomerID="@item.CustomerID">Delete</a>
+
+                    <a asp-controller="Payment" asp-action="Index" asp-route-CustomerID="@item.CustomerID">Payment Information</a>
+                    <a asp-controller="Order" asp-action="Index" asp-route-CustomerID="@item.CustomerID">Orders</a>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Employee" asp-action="Index">Return to My Account</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

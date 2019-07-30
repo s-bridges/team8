@@ -23,22 +23,53 @@ namespace team8.Controllers
         //check the login and return the customerID for use by payment and order controller
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(string CustomerUserName, string CustomerPassword)
+        public IActionResult Index(string UserName, string Password, string UserType)
         {
             if (ModelState.IsValid)
             {
-
-                Customer customer = objLogin.CustomerLogin(CustomerUserName, CustomerPassword);
-
-                if (customer.CustomerID != 0)
+                if (UserType == null || UserType == "Customer")
                 {
-                    Session.CustomerID = customer.CustomerID;
-                    return RedirectToAction("Index","Customer", new { customer.CustomerID });
+                    Customer customer = objLogin.CustomerLogin(UserName, Password);
+
+                    if (customer.CustomerID != 0)
+                    {
+                        Session.CustomerID = customer.CustomerID;
+                        return RedirectToAction("Index", "Customer", new { customer.CustomerID });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
-                else
+                if (UserType == "Employee")
                 {
-                    return RedirectToAction("Index");
+                    Employee employee = objLogin.EmployeeLogin(UserName, Password);
+                    
+                    if (employee.EmployeeID != 0)
+                    {
+                        Session.EmployeeID = employee.EmployeeID;
+                        return RedirectToAction("Index", "Employee", new { employee.EmployeeID });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
+                if (UserType == "OpsManager")
+                {
+                    OpsManager opsManager = objLogin.OpsManagerLogin(UserName, Password);
+
+                    if (opsManager.OpsManagerID != 0)
+                    {
+                        Session.EmployeeID = opsManager.OpsManagerID;
+                        return RedirectToAction("Index", "OpsManager", new { opsManager.OpsManagerID });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+
             }
 
             return RedirectToAction("Index");

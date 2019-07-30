@@ -8,6 +8,8 @@ namespace team8
     public static class Session
     {
         static int customerID;
+        static int employeeID;
+        static int opsManagerID;
 
         public static int CustomerID
         {
@@ -20,7 +22,28 @@ namespace team8
                 customerID = value;
             }
         }
-
+        public static int EmployeeID
+        {
+            get
+            {
+                return employeeID;
+            }
+            set
+            {
+                employeeID = value;
+            }
+        }
+        public static int OpsManagerID
+        {
+            get
+            {
+                return opsManagerID;
+            }
+            set
+            {
+                opsManagerID = value;
+            }
+        }
 
     }
 }

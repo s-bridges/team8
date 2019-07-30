@@ -29,12 +29,9 @@ namespace team8.Controllers
             
             return View(customer);
 
-        }        
-        
-
+        }
 
         //create customer
-
         [HttpGet]
         public IActionResult Create()
         {
@@ -105,35 +102,8 @@ namespace team8.Controllers
 
             return View(customer);
         }
+        
 
-
-        //delete customer 
-        [HttpGet]
-        public IActionResult Delete(int? CustomerID)
-        {
-            if (CustomerID == null)
-            {
-                return NotFound();
-            }
-
-            Customer customer = objCustomer.GetCustomerData(CustomerID);
-
-            if (CustomerID == null)
-            {
-                return NotFound();
-            }
-            return View(customer);
-        }
-        //confirm delete
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int? CustomerID)
-        {
-            objCustomer.DeleteCustomer(CustomerID);
-            return RedirectToAction("ViewAllCustomers","Customer");
-
-        }
 
         [HttpGet]
         public IActionResult ViewAllCustomers()

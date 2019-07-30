@@ -13,6 +13,9 @@ namespace team8.Controllers
         public IActionResult Index()
         {
             Session.CustomerID = 0;
+            Session.EmployeeID = 0;
+            Session.OpsManagerID = 0;
+
             return RedirectToAction("Index", "Home");
         }
     }

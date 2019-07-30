@@ -131,10 +131,8 @@ namespace team8.Models
             }
 
         }
-        //delete a customer
 
-        //delete Card 
-
+        //delete a customer        
         public void DeleteCustomer(int? CustomerID)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -150,10 +148,5 @@ namespace team8.Models
 
             }
         }
-
-
-
-
-
     }
 }

@@ -18,7 +18,7 @@ namespace team8.Controllers
 
         //shows all orders for a customer
         [HttpGet]
-        public IActionResult Index(int CustomerID)
+        public IActionResult Index(int CustomerID) 
         {
             List<Order> lstOrder = new List<Order>();
             lstOrder = objOrder.GetAllCustomerOrder(CustomerID).ToList();

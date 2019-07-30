@@ -1,0 +1,29 @@
+﻿@model team8.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>My Account</h2>
+
+<h4>Welcome @Html.DisplayFor(model => model.EmployeeFirstName) </h4>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <div>
+        <a asp-controller="Employee" asp-action="AllCustomers">View All Customers</a>
+    </div>
+    <div>
+        <a asp-controller="Employee" asp-action="AllOrders">View All Orders</a>
+    </div>
+
+    <di>
+        <a asp-controller="Employee" asp-action="EmployeeDetails" asp-route-EmployeeID="@Model.EmployeeID">My Information</a>
+    </di>
+       
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

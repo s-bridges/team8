@@ -1,0 +1,84 @@
+﻿@model team8.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeFirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeFirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeLastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeState)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeState)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeZipcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeZipcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeePhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeePhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeUserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeePassword)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeePassword)
+        </dd>
+
+
+    </dl>
+    <a asp-controller="Employee" asp-action="EmployeeEdit" asp-route-EmployeeID="@Model.EmployeeID">Edit Information</a>
+</div>
+<div>
+
+    <a asp-controller="Employee"asp-action="Index">Back to My Account</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

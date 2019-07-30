@@ -1,0 +1,84 @@
+﻿@model team8.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Order Details</h2>
+<div>
+    <h4>Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CatalogID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CatalogID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Media)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Media)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentType)
+        </dd>
+
+    </dl>
+    <a asp-controller="Employee" asp-action="AllOrders">Back to List</a>
+
+</div>
+<div>
+
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
