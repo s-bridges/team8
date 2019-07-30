@@ -1,0 +1,109 @@
+﻿
+@model IEnumerable<team8.Models.Payment>
+
+
+
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h2>Payment</h2>
+<h4>Credit Cards on file. </h4>
+
+<div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BillingAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BillingCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BillingSTate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BillingZipcode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardExpDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardCVV)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CardID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BillingAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BillingCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BillingSTate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BillingZipcode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CardNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CardType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CardName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CardExpDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CardCVV)
+                    </td>
+                    <td>
+                        <a asp-action="CustomerPaymentDetails" asp-route-CardID="@item.CardID">Details</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <div>
+        <a asp-controller="Employee" asp-action="CustomerDetails" asp-route-CustomerID="@TempData["CustomerID"]">Return to Details</a>
+    </div>
+</div>
+
+<div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

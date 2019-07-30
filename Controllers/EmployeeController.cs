@@ -13,6 +13,8 @@ namespace team8.Controllers
         CustomerDataAccessLayer objCustomer = new CustomerDataAccessLayer();
         OrderDataLayer objOrder = new OrderDataLayer();
         EmployeeDataLayer objEmployee = new EmployeeDataLayer();
+        PaymentDataLayer objPayment = new PaymentDataLayer();
+
 
         public IActionResult Index()
         {
@@ -198,6 +200,46 @@ namespace team8.Controllers
                 return View();
             }
 
+        }
+
+
+
+        //controls for payment
+        //index page controller
+        [HttpGet]
+        public IActionResult CustomerPayment(int CustomerID)
+        {
+
+
+            List<Payment> lstPayment = new List<Payment>();
+            lstPayment = objPayment.GetAllCustomerPayment(CustomerID).ToList();
+
+            if (lstPayment != null)
+            {
+                TempData["CustomerID"] = CustomerID;
+                return View(lstPayment);
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+        [HttpGet]
+        public IActionResult CustomerPaymentDetails(int? CardID)
+        {
+            if (CardID == null)
+            {
+                return NotFound();
+            }
+            Payment payment = objPayment.GetPaymentData(CardID);
+
+            if (payment == null)
+            {
+                return NotFound();
+            }
+
+            return View(payment);
         }
 
 
