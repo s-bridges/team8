@@ -163,7 +163,7 @@ namespace team8.Models
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("CardID", CardID);
-
+                
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();

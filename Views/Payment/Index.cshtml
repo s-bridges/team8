@@ -95,12 +95,14 @@
                     </td>
                 </tr>
             }
-            
+
         </tbody>
     </table>
     <div>
-        
         <a asp-controller="Payment" asp-action="Create" asp-route-CustomerID="@TempData["CustomerID"]">New Payment</a>
+    </div>
+    <div>
+        <a asp-controller="Customer" asp-action="Index" asp-route-CustomerID="@TempData["CustomerID"]">Return to My Account</a>
     </div>
 </div>
 

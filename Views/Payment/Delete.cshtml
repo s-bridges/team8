@@ -73,14 +73,11 @@
     </dl>
     <form asp-action="Delete">
         <input type="hidden" asp-for="CardID" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-
-        <button onclick="goBack()">Return to My Account</button>
-
-        <script>
-                function goBack() {
-                    window.history.back();
-                }
-        </script>
+        <input type="submit" value="Delete" class="btn btn-default" />
     </form>
-</div>   
+
+    <div>
+        <a asp-controller="Payment" asp-action="Index" asp-route-CustomerID="@Model.CustomerID">Cancel</a>
+    </div>
+</div>  
+    

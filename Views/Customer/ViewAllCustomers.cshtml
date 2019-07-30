@@ -88,7 +88,7 @@
                     <a asp-action="Delete" asp-route-CustomerID="@item.CustomerID">Delete</a>
 
                     <a asp-controller="Payment" asp-action="Index" asp-route-CustomerID="@item.CustomerID">Payment Information</a>
-                    <a asp-controller="Payment" asp-action="Create" asp-route-CustomerID="@item.CustomerID">New Credit Card</a>
+                    <a asp-controller="Order" asp-action="Index" asp-route-CustomerID="@item.CustomerID">Orders</a>
                 </td>
 
             </tr>

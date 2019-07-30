@@ -46,7 +46,7 @@ namespace team8.Controllers
             Payment payment = new Payment();
             payment.CustomerID = CustomerID;
             TempData["CustomerID"] = CustomerID;
-
+            
             return View(payment);
             
         }
@@ -128,6 +128,7 @@ namespace team8.Controllers
             }
 
             Payment payment = objPayment.GetPaymentData(CardID);
+            TempData["CustomerID"] = payment.CustomerID;
 
             if (CardID == null)
             {
@@ -141,8 +142,13 @@ namespace team8.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? CardID)
         {
+            
             objPayment.DeletePayment(CardID);
-            return RedirectToAction("Index");
+
+            Payment payment = new Payment();
+
+            payment.CustomerID = Convert.ToInt32(TempData["CustomerID"]);
+            return RedirectToAction("Index", "Payment", new { payment.CustomerID});
 
         }
 

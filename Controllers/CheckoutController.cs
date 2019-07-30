@@ -58,7 +58,7 @@ namespace team8.Controllers
         public IActionResult Index([Bind]Checkout checkout)
         {
            
-            //does not
+            //works
             Catalog catalog = objCatalog.GetItemPrice(Convert.ToInt32(TempData["CatalogID"]));
             decimal itemPrice = Convert.ToDecimal(catalog.ItemPrice);
 
@@ -71,6 +71,7 @@ namespace team8.Controllers
             //   logic for the 10% down on podelivery on credit card
             //}
 
+            //get the total 
             checkout.order.Total = Convert.ToDecimal(quantity * itemPrice);
 
                 objOrder.AddOrder(checkout);
