@@ -33,3 +33,14 @@
         display: none;
     }
 }
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.navbar, .navbar-inverse, .navbar-fixed-top {
+    background: rgb(61, 79, 82) !important;
+    border-color: rgb(61, 79, 82) !important;
+ }
