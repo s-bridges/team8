@@ -14,7 +14,7 @@ namespace team8.Controllers
         OrderDataLayer objOrder = new OrderDataLayer();
         EmployeeDataLayer objEmployee = new EmployeeDataLayer();
         PaymentDataLayer objPayment = new PaymentDataLayer();
-
+        CatalogDataLayer objCatalog = new CatalogDataLayer();
 
         public IActionResult Index()
         {
@@ -72,18 +72,16 @@ namespace team8.Controllers
             return View(employee);
         }
 
-
+        //-----------------------------------------------------
         //all controls for customer
 
         //get all customers
         [HttpGet]
         public IActionResult AllCustomers()
         {
-
-            
+                        
                 List<Customer> lstCustomer = new List<Customer>();
                 lstCustomer = objCustomer.GetAllCustomers().ToList();
-
 
                 return View(lstCustomer);
             
@@ -139,7 +137,7 @@ namespace team8.Controllers
 
 
 
-
+        //------------------------------------------------------
 
         //controls for orders
         //get all orders        
@@ -202,7 +200,7 @@ namespace team8.Controllers
 
         }
 
-
+        //---------------------------------------------------
 
         //controls for payment
         //index page controller
@@ -225,6 +223,8 @@ namespace team8.Controllers
             }
 
         }
+
+        //get payment details for a customer
         [HttpGet]
         public IActionResult CustomerPaymentDetails(int? CardID)
         {
@@ -243,7 +243,113 @@ namespace team8.Controllers
         }
 
 
+        //------------------------------------------------------------
 
 
+        //controls for catalog 
+        //edit catalog
+        [HttpGet]
+        public IActionResult CatalogEdit(int? CatalogID)
+        {
+            if (CatalogID == null)
+            { return NotFound(); }
+
+            Catalog catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            if (catalog == null)
+            { return NotFound(); }
+            return View(catalog);
+        }
+
+        //edit catalog
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CatalogEdit(int CatalogID, [Bind]Catalog catalog)
+        {
+            if (CatalogID != catalog.CatalogID)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                objCatalog.UpdateCatalog(catalog);
+                return RedirectToAction("Catalog");
+            }
+            return View(catalog);
+        }
+
+        //show the catalog
+        public IActionResult Catalog()
+        {
+            List<Catalog> lstCatalog = new List<Catalog>();
+            lstCatalog = objCatalog.GetAllItems().ToList();
+
+
+            return View(lstCatalog);
+        }
+
+        //create new catalog entry
+        public IActionResult CatalogCreate()
+        {
+            return View();
+        }
+        //post the new item
+        [HttpPost]
+        public IActionResult CatalogCreate(Catalog catalog)
+        {
+            if (ModelState.IsValid)
+            {
+                objCatalog.AddCatalog(catalog);
+                return RedirectToAction("Catalog");
+            }
+            return View(catalog);
+        }
+
+        //catalog details
+        [HttpGet]
+        public IActionResult CatalogDetails(int? CatalogID)
+        {
+            if (CatalogID == null)
+            {
+                return NotFound();
+            }
+
+            Catalog catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            if (catalog == null)
+            {
+                return NotFound();
+            }
+
+            return View(catalog);
+        }
+
+        //delete catalog
+        [HttpGet]
+        public IActionResult CatalogDelete(int? CatalogID)
+        {
+            if (CatalogID == null)
+            {
+                return NotFound();
+            }
+
+            Catalog catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            if (CatalogID == null)
+            {
+                return NotFound();
+            }
+            return View(catalog);
+        }
+        //confirm delete
+
+        [HttpPost, ActionName("CatalogDelete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteCatalogConfirmed(int? CatalogID)
+        {
+            objCatalog.DeleteCatalog(CatalogID);
+            return RedirectToAction("Catalog", "Employee");
+
+        }
     }
 }

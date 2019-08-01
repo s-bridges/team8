@@ -1,0 +1,47 @@
+﻿@model team8.Models.Catalog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>@Html.DisplayFor(model => model.ItemName)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.ItemPhoto)" height="200" width="200" />
+        </dd>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.ItemPrice)
+            @Html.DisplayFor(model => model.ItemPrice)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.ItemStock)
+            @Html.DisplayFor(model => model.ItemStock)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.CatalogID)
+            @Html.DisplayFor(model => model.CatalogID)
+        </dd>
+
+
+    </dl>
+    <div>
+    <a asp-controller="Employee" asp-action="CatalogEdit" asp-route-CatalogID="@Model.CatalogID">Edit Catalog Item</a>
+    </div>
+    <div>
+    <a asp-controller="Employee" asp-action="CatalogDelete" asp-route-CatalogID="@Model.CatalogID">Delete Catalog Item</a>
+    </div>
+</div>
+<div>
+
+    <a asp-controller="Employee" asp-action="Catalog">Back to Products</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -12,14 +12,16 @@ namespace team8.Models
         public int OrderID { get; set; }
         public int CatalogID { get; set; }
         public int CustomerID { get; set; }
+        [Display(Name = "Job Type")]
         public string JobType{ get; set; }
-
         public string Media { get; set; }
 
         public string Content { get; set; }
         public int Quantity { get; set; }
         public decimal Total { get; set; }
+        [Display(Name = "Order Status")]
         public string OrderStatus { get; set; }
+        [Display(Name = "Payment Type")]
         public string PaymentType { get; set; }
 
         public virtual Customer customer { get; set; }

@@ -12,7 +12,7 @@ namespace team8.Models
     {
         string connectionString = "Data Source=wscteam8.database.windows.net;Initial Catalog=WSC_Team_8;Persist Security Info=True;User ID=Team8;Password=WSCpassword8";
 
-
+        //get allitems
         public IEnumerable<Catalog> GetAllItems()
         {
 
@@ -49,6 +49,7 @@ namespace team8.Models
 
         }
 
+        //get one item
         public Catalog GetOrderCatalog(int? CatalogID)
         {
 
@@ -78,6 +79,8 @@ namespace team8.Models
             return catalog;
 
         }
+
+        //get the price of the option
         public Catalog GetItemPrice(int? CatalogID)
         {
 
@@ -99,5 +102,66 @@ namespace team8.Models
             return catalog;
 
         }
+
+        //updates the catalog
+        public void UpdateCatalog(Catalog catalog)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spUpdateCatalog", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@CatalogID", catalog.CatalogID);
+                cmd.Parameters.AddWithValue("@ItemName", catalog.ItemName);
+                cmd.Parameters.AddWithValue("@ItemPhoto", catalog.ItemPhoto);
+                cmd.Parameters.AddWithValue("@ItemStock", catalog.ItemStock);
+                cmd.Parameters.AddWithValue("@ItemPrice", catalog.ItemPrice);
+
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+        //add catalog item
+        public void AddCatalog(Catalog catalog)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spAddCatalog", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                
+                cmd.Parameters.AddWithValue("@ItemName", catalog.ItemName);
+                cmd.Parameters.AddWithValue("@ItemPhoto", catalog.ItemPhoto);
+                cmd.Parameters.AddWithValue("@ItemStock", catalog.ItemStock);
+                cmd.Parameters.AddWithValue("@ItemPrice", catalog.ItemPrice);
+
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+
+        //delete a catalog entry
+        public void DeleteCatalog(int? CatalogID)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spDeleteCatalog", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@CatalogID", CatalogID);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+
     }
 }

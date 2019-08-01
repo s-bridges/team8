@@ -6,23 +6,30 @@
 
 <h2>My Account</h2>
 
-<h4>Welcome @Html.DisplayFor(model => model.EmployeeFirstName) </h4>
+<h3>Welcome @Html.DisplayFor(model => model.EmployeeFirstName) </h3>
+
 
 <div>
-    <h4>Employee</h4>
-    <hr />
     <div>
         <a asp-controller="Employee" asp-action="AllCustomers">View All Customers</a>
     </div>
     <div>
         <a asp-controller="Employee" asp-action="AllOrders">View All Orders</a>
     </div>
-
-    <di>
-        <a asp-controller="Employee" asp-action="EmployeeDetails" asp-route-EmployeeID="@Model.EmployeeID">My Information</a>
-    </di>
-       
 </div>
+
+<div>
+    <div>
+        <a asp-controller="Employee" asp-action="Catalog">View Catalog</a>
+    </div>
+</div>
+
+<div>
+    <div>
+        <a asp-controller="Employee" asp-action="EmployeeDetails" asp-route-EmployeeID="@Model.EmployeeID">My Information</a>
+    </div>
+</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
