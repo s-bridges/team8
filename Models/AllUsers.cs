@@ -7,6 +7,7 @@ namespace team8.Models
 {
     public class AllUsers
     {
+        public string userType { get; set; }
         public virtual Customer customer { get; set; }
         public virtual Employee employee { get; set; }
         public virtual OpsManager opsManager { get; set; }

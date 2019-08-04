@@ -10,20 +10,27 @@ namespace team8.Models
     {
         [Key]
         public int OpsManagerID { get; set; }
-        public int EmployeeID { get; set; }
+        [Display(Name = "First Name")]
         public string OpsManagerFirstName { get; set; }
+        [Display(Name = "Last Name")]
         public string OpsManagerLastName { get; set; }
-
+        [Display(Name = "Address")]
         public string OpsManagerAddress { get; set; }
+        [Display(Name = "City")]
         public string OpsManagerCity { get; set; }
+        [Display(Name = "State")]
         public string OpsManagerState { get; set; }
+        [Display(Name = "Zipcode")]
         public int OpsManagerZipcode { get; set; }
         [Phone]
+        [Display(Name = "Phone Number")]
         public string OpsManagerPhoneNumber { get; set; }
+        [Display(Name = "Job Title")]
         public string JobTitle { get; set; }
+        [Display(Name = "User Name")]
         public string OpsManagerUserName { get; set; }
+        [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string OpsManagerPassword { get; set; }
-        public virtual Employee employee { get; set; }
     }
 }

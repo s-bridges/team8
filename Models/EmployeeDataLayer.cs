@@ -71,5 +71,42 @@ namespace team8.Models
 
             }
         }
+
+        public IEnumerable<Employee> GetAllEmployees()
+        {
+            List<Employee> lstEmployee = new List<Employee>();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string SqlQuery = "SELECT * FROM Employee";
+                SqlCommand cmd = new SqlCommand(SqlQuery, con);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Employee employee = new Employee();
+
+
+                    employee.EmployeeID = Convert.ToInt32(rdr["EmployeeID"]);
+                    employee.EmployeeFirstName = rdr["EmployeeFirstName"].ToString();
+                    employee.EmployeeLastName = rdr["EmployeeLastName"].ToString();
+                    employee.EmployeeAddress = rdr["EmployeeAddress"].ToString();
+                    employee.EmployeeCity = rdr["EmployeeCity"].ToString();
+                    employee.EmployeeState = rdr["EmployeeState"].ToString();
+                    employee.EmployeeZipcode = Convert.ToInt32(rdr["EmployeeZipcode"]);
+                    employee.EmployeePhoneNumber = rdr["EmployeePhoneNumber"].ToString();
+                    employee.JobTitle = rdr["EmployeeJobTitle"].ToString();
+                    employee.EmployeeUserName = rdr["EmployeeUserName"].ToString();
+                    employee.EmployeePassword = rdr["EmployeePassword"].ToString();
+
+                    lstEmployee.Add(employee);
+                }
+                con.Close();                
+            } 
+            return lstEmployee;
+
+        }
     }
 }

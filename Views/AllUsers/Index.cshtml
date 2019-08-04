@@ -1,0 +1,35 @@
+﻿@model team8.Models.AllUsers
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>View All Users</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="userType" class="control-label">User Type</label>
+                <select asp-for="userType" name="userType">
+                    <option>- Please select a type -</option>
+                    <option value="C">Customers</option>
+                    <option value="E">Employees</option>
+                    <option value="O">Operations Manager</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
