@@ -38,7 +38,8 @@ namespace team8.Models
                     order.Total = Convert.ToDecimal(rdr["Total"]);
                     order.OrderStatus = rdr["OrderStatus"].ToString();
                     order.PaymentType = rdr["PaymentType"].ToString();                 
-
+                    order.CardID = Convert.ToInt32(rdr["CardID"]);
+                    order.TotalDue = Convert.ToDecimal(rdr["TotalDue"]);
 
                     lstOrder.Add(order);
                 }
@@ -74,6 +75,8 @@ namespace team8.Models
                     order.Total = Convert.ToDecimal(rdr["Total"]);
                     order.OrderStatus = rdr["OrderStatus"].ToString();
                     order.PaymentType = rdr["PaymentType"].ToString();
+                    order.CardID = Convert.ToInt32(rdr["CardID"]);
+                    order.TotalDue = Convert.ToDecimal(rdr["TotalDue"]);
 
 
 
@@ -100,6 +103,8 @@ namespace team8.Models
                 cmd.Parameters.AddWithValue("@Total", checkout.order.Total);
                 cmd.Parameters.AddWithValue("@OrderStatus", checkout.order.OrderStatus);
                 cmd.Parameters.AddWithValue("@PaymentType", checkout.order.PaymentType);
+                cmd.Parameters.AddWithValue("@CardID", checkout.order.CardID);
+                cmd.Parameters.AddWithValue("@TotalDue", checkout.order.TotalDue);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -134,7 +139,8 @@ namespace team8.Models
                     order.Total = Convert.ToDecimal(rdr["Total"]);
                     order.OrderStatus = rdr["OrderStatus"].ToString();
                     order.PaymentType = rdr["PaymentType"].ToString();
-
+                    order.CardID = Convert.ToInt32(rdr["CardID"]);
+                    order.TotalDue = Convert.ToDecimal(rdr["TotalDue"]);
 
                     lstOrder.Add(order);
                 }

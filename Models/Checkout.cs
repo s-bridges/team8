@@ -11,5 +11,7 @@ namespace team8.Models
         public Catalog catalog { get; set; }
         public Customer customer { get; set; }
         public Payment payment { get; set; }
+
+
     }
 }

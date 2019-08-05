@@ -45,6 +45,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.PaymentType)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalDue)
+                </th>
 
             </tr>
         </thead>
@@ -81,6 +87,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PaymentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalDue)
                 </td>
 
                 <td>

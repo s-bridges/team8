@@ -38,7 +38,7 @@
                 </select>
             </div>
 
-            <div class="form-group">   
+            <div class="form-group">
                 <label asp-for="order.Media" class="control-label">Media</label>
                 <input asp-for="order.Media" class="form-control" />
                 <span asp-validation-for="order.Media" class="text-danger"></span>
@@ -57,8 +57,7 @@
             </div>
 
             <input type="hidden" asp-for="order.OrderStatus" value="Pending" />
-            
-           
+
             <div class="form-group">
                 <label asp-for="order.PaymentType" class="control-label">Payment Type</label>
                 <select asp-for="order.PaymentType" name="order.PaymentType">
@@ -67,7 +66,18 @@
                     <option value="Existing Card">Exsisting Credit Card</option>
                 </select>
             </div>
-                       
+
+            <div class="form-group">
+                <label asp-for="order.CardID" class="control-label">Card on File</label>
+                <select asp-for="order.CardID" name="order.CardID">
+                    @foreach (var item in Model.payment.lstPayment)
+                    {
+                        <option value="@item.CardID">
+                            "@item.CardNumber.ToString()"
+                            </option>
+                    }
+                </select>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-default" />
             </div>

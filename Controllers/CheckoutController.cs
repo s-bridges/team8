@@ -37,6 +37,7 @@ namespace team8.Controllers
             Checkout checkout = new Checkout();
             checkout.order = new Order();
             checkout.catalog = new Catalog();
+            checkout.payment = new Payment();
 
             //fill the form with the required ORDER items
             checkout.order.CustomerID = Session.CustomerID;
@@ -47,7 +48,14 @@ namespace team8.Controllers
             checkout.catalog = objCatalog.GetOrderCatalog(CatalogID);
             TempData["CatalogID"] = checkout.catalog.CatalogID;
             //get the payment information for display
-            //still need to add the code,,
+
+            checkout.payment.lstPayment = objPayment.GetAllCustomerPayment(Convert.ToInt32(Session.CustomerID)).ToList();
+            
+
+            if (checkout.payment.lstPayment == null)
+            {
+                return RedirectToAction("Create", "Payment", Session.CustomerID);
+            }
 
 
             return View(checkout);
@@ -64,19 +72,28 @@ namespace team8.Controllers
 
             //works
             int quantity = Convert.ToInt32(checkout.order.Quantity);
+            decimal podPrice = Convert.ToDecimal(.10);
 
 
-            //if (order.PaymentType == "PODelivery")
-            //{
-            //   logic for the 10% down on podelivery on credit card
-            //}
 
             //get the total 
             checkout.order.Total = Convert.ToDecimal(quantity * itemPrice);
 
+            //total for payment on delivery
+            if (checkout.order.PaymentType == "PODelivery")
+            {
+                checkout.order.TotalDue = podPrice * checkout.order.Total;
+            }
+            else
+            {
+                checkout.order.TotalDue = checkout.order.Total;
+            }
+
                 objOrder.AddOrder(checkout);
-                return RedirectToAction("Index", "Customer", new { checkout.order.CustomerID });
+            
+                return RedirectToAction("Index", "Order", new { Session.CustomerID });
 
         }
+       
     }
 }

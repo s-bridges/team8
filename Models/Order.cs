@@ -24,8 +24,16 @@ namespace team8.Models
         [Display(Name = "Payment Type")]
         public string PaymentType { get; set; }
 
+        public int CardID { get; set; }
+
+        [Display(Name = "Total Due")]
+        public decimal TotalDue { get; set; }
+
         public virtual Customer customer { get; set; }
         public virtual Catalog catalog { get; set; }
+        public virtual Payment payment { get; set; }
+
+
         public ICollection<Catalog> Catalog { get; set; }
     }
 

@@ -37,6 +37,7 @@ namespace team8.Models
         public string CardCVV { get; set; }
 
         public virtual Customer customer { get; set; }
+        public IEnumerable<Payment> lstPayment { get; set; }
     }
 
 }

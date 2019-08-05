@@ -53,10 +53,7 @@ namespace team8.Models
             return  lstPayment;
 
         }
-
-
-       
-
+        
 
         //update existing card
 
