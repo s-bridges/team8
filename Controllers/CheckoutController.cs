@@ -92,7 +92,6 @@ namespace team8.Controllers
                 objOrder.AddOrder(checkout);
             
                 return RedirectToAction("Index", "Order", new { Session.CustomerID });
-
         }
        
     }

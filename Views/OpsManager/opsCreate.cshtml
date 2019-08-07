@@ -1,0 +1,80 @@
+﻿@model team8.Models.OpsManager
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+
+<h4>New Operations Manager</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="opsCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OpsManagerFirstName" class="control-label">First Name</label>
+                <input asp-for="OpsManagerFirstName" class="form-control" />
+                <span asp-validation-for="OpsManagerFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsManagerLastName" class="control-label">Last Name</label>
+                <input asp-for="OpsManagerLastName" class="form-control" />
+                <span asp-validation-for="OpsManagerLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsManagerAddress" class="control-label">Address</label>
+                <input asp-for="OpsManagerAddress" class="form-control" />
+                <span asp-validation-for="OpsManagerAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsManagerCity" class="control-label">City</label>
+                <input asp-for="OpsManagerCity" class="form-control" />
+                <span asp-validation-for="OpsManagerCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsManagerState" class="control-label">State</label>
+                <input asp-for="OpsManagerState" class="form-control" />
+                <span asp-validation-for="OpsManagerState" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OpsManagerZipcode" class="control-label">Zipcode</label>
+                <input asp-for="OpsManagerZipcode" class="form-control" />
+                <span asp-validation-for="OpsManagerZipcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsManagerPhoneNumber" class="control-label">Phone Number</label>
+                <input asp-for="OpsManagerPhoneNumber" class="form-control" />
+                <span asp-validation-for="OpsManagerPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobTitle" class="control-label">Job Title</label>
+                <input asp-for="JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsManagerUserName" class="control-label">User Name</label>
+                <input asp-for="OpsManagerUserName" class="form-control" />
+                <span asp-validation-for="OpsManagerUserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpsManagerPassword" class="control-label">Password</label>
+                <input asp-for="OpsManagerPassword" class="form-control" />
+                <span asp-validation-for="OpsManagerPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+        <a asp-action="Index">Back to List</a>
+    </div>
+    
+</div>
+<div>
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

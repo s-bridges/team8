@@ -1,0 +1,84 @@
+﻿@model team8.Models.OpsManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerFirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerFirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerLastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerState)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerState)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerZipcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerZipcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerPhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerPhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerUserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpsManagerPassword)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OpsManagerPassword)
+        </dd>
+
+
+    </dl>
+    <a asp-controller="OpsManager" asp-action="opsEdit" asp-route-OpsManagerID="@Model.OpsManagerID">Edit Information</a>
+</div>
+<div>
+
+    <a asp-controller="OpsManager" asp-action="Index">Back to My Account</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

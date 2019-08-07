@@ -21,4 +21,28 @@
   <ItemGroup>
     <PackageGroup Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\OpsManager\Catalog.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\OpsManager\CatalogCreate.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\OpsManager\CatalogDelete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\OpsManager\CatalogDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\OpsManager\CatalogEdit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\OpsManager\EmployeeDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\OpsManager\EmployeeEdit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
 </Project>

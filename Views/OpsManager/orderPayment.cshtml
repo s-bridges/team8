@@ -1,0 +1,90 @@
+﻿@model team8.Models.Payment
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>Order Payment Method</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CardID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingSTate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingSTate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingZipcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingZipcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CardNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CardType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CardName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CardExpDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardExpDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CardCVV)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardCVV)
+        </dd>
+
+    </dl>
+    <a asp-controller="OpsManager" asp-action="orderDetails" asp-route-OrderID="@TempData["OrderID"]">Back to Order Details</a>
+
+</div>
+<div>
+
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -11,7 +11,7 @@ namespace team8.Models
     {
         string connectionString = "Data Source=wscteam8.database.windows.net;Initial Catalog=WSC_Team_8;User ID=Team8;Password=WSCpassword8;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        //look for a specific customer ---- useful with account information
+        //look for a specific employee---- useful with account information
         public Employee GetEmployeeData(int? EmployeeID)
         {
             Employee employee = new Employee();
@@ -44,6 +44,7 @@ namespace team8.Models
             }
 
         }
+
         //update record employee
         public void UpdateEmployee(Employee employee)
         {
@@ -107,6 +108,52 @@ namespace team8.Models
             } 
             return lstEmployee;
 
+        }
+        
+
+        //add a new employee 
+        public void AddEmployee(Employee employee)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spAddEmployee", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                
+                cmd.Parameters.AddWithValue("@EmployeeFirstName", employee.EmployeeFirstName);
+                cmd.Parameters.AddWithValue("@EmployeeLastName", employee.EmployeeLastName);
+                cmd.Parameters.AddWithValue("@EmployeeAddress", employee.EmployeeAddress);
+                cmd.Parameters.AddWithValue("@EmployeeCity", employee.EmployeeCity);
+                cmd.Parameters.AddWithValue("@EmployeeState", employee.EmployeeState);
+                cmd.Parameters.AddWithValue("@EmployeeZipcode", employee.EmployeeZipcode);
+                cmd.Parameters.AddWithValue("@EmployeePhoneNumber", employee.EmployeePhoneNumber);
+                cmd.Parameters.AddWithValue("@EmployeeJobTitle", employee.JobTitle);
+
+                cmd.Parameters.AddWithValue("@EmployeeUserName", employee.EmployeeUserName);
+                cmd.Parameters.AddWithValue("@EmployeePassword", employee.EmployeePassword);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+
+        //delete a customer        
+        public void DeleteEmployee(int? EmployeeID)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spDeleteEmployee", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
         }
     }
 }

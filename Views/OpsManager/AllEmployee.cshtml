@@ -1,0 +1,105 @@
+﻿@model IEnumerable<team8.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<h2>All Employees</h2>
+<h4>Employees</h4>
+<p>
+    <a asp-action="EmployeeCreate">Create New Employee</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeZipcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeePhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeUserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeePassword)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeZipcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeePhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeePassword)
+            </td>
+            <td>
+                <a asp-controller="OpsManager" asp-action="EmployeeDetails" asp-route-EmployeeID="@item.EmployeeID">Details</a>
+            </td>
+            
+
+        </tr>
+        }
+
+    </tbody>
+</table>
+<div>
+    <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

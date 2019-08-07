@@ -1,0 +1,48 @@
+﻿@model team8.Models.Catalog
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+
+<h4>Catalog Item</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CatalogCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ItemName" class="control-label">Item Name</label>
+                <input asp-for="ItemName" class="form-control" />
+                <span asp-validation-for="ItemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemPhoto" class="control-label">Item Photo (URL)</label>
+                <input asp-for="ItemPhoto" class="form-control" />
+                <span asp-validation-for="ItemPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemPrice" class="control-label">Item Price</label>
+                <input asp-for="ItemPrice" class="form-control" />
+                <span asp-validation-for="ItemPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemStock" class="control-label">Stock</label>
+                <input asp-for="ItemStock" class="form-control" />
+                <span asp-validation-for="ItemStock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+        <a asp-controller="OpsManager" asp-action="Catalog">Back to List</a>
+    </div>    
+</div>
+<div>
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,15 +1,42 @@
-﻿
+﻿@model team8.Models.OpsManager
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Details";
 }
 
-<!DOCTYPE html>
+<h2>Operations Manager Account</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-</body>
-</html>
+<h3>Welcome @Html.DisplayFor(model => model.OpsManagerFirstName) </h3>
+
+
+<div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="AllCustomer">Customers</a>
+    </div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="orderByStatus">Orders</a>
+    </div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="AllEmployee">Employees</a>
+    </div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="AllOps">Operations Mananagers</a>
+    </div>
+</div>
+
+<div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="Catalog">Catalog</a>
+    </div>
+</div>
+
+<div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="opsDetails" asp-route-OpsManagerID="@Model.OpsManagerID">My Information</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -22,16 +22,17 @@ namespace team8.Controllers
                         
             return View(employee);
         }
+
         //controls for employee
         //get employee details
-        public IActionResult EmployeeDetails(int? EmployeeId)
+        public IActionResult EmployeeDetails(int? EmployeeID)
         {
-            if (EmployeeId == null)
+            if (EmployeeID == null)
             {
                 return NotFound();
             }
 
-            Employee employee = objEmployee.GetEmployeeData(EmployeeId);
+            Employee employee = objEmployee.GetEmployeeData(EmployeeID);
 
             if (employee == null)
             {
@@ -126,7 +127,7 @@ namespace team8.Controllers
         }
         //confirm delete
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("CustomerDelete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? CustomerID)
         {
