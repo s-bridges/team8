@@ -29,6 +29,40 @@ namespace team8.Controllers
             return View(ops);
         }
 
+        //get for all users
+        public IActionResult AllUsers()
+        {
+            OpsManager ops = objOps.GetOpsManager(Convert.ToInt32(Session.OpsManagerID));
+
+            return View(ops);
+        }
+        //this is for all users 
+        [HttpPost]
+        public IActionResult AllUsers(string userType)
+        {
+            if (ModelState.IsValid)
+            {
+                if (userType == null || userType == "C")
+                {
+                    return RedirectToAction("AllCustomer", "OpsManager");
+
+                }
+                if (userType == "E")
+                {
+                    return RedirectToAction("AllEmployee", "OpsManager");
+
+                }
+                if (userType == "O")
+                {
+                    return RedirectToAction("AllOps", "OpsManager");
+
+                }
+
+            }
+
+            return RedirectToAction("Index");
+        }
+
 
 
         //get ops details

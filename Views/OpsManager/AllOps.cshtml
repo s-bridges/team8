@@ -94,7 +94,12 @@
 
     </tbody>
 </table>
-<a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
+<div>
+    <a asp-controller="OpsManager" asp-action="AllUsers">Return to Users</a>
+</div>
+<div>
+    <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

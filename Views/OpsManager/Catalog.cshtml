@@ -48,9 +48,15 @@
                     </td>
 
                     <td>
-                        <a asp-controller="OpsManager" asp-action="CatalogDetails" asp-route-CatalogID="@item.CatalogID">Product Details</a>
-                        <a asp-controller="OpsManager" asp-action="CatalogEdit" asp-route-CatalogID="@item.CatalogID">Edit Catalog Item</a>
-                        <a asp-controller="OpsManager" asp-action="CatalogDelete" asp-route-CatalogID="@item.CatalogID">Delete Catalog Item</a>
+                        <div>
+                            <a asp-controller="OpsManager" asp-action="CatalogDetails" asp-route-CatalogID="@item.CatalogID">Product Details</a>
+                        </div>
+                        <div>
+                            <a asp-controller="OpsManager" asp-action="CatalogEdit" asp-route-CatalogID="@item.CatalogID">Edit Catalog Item</a>
+                        </div>
+                        <div>
+                            <a asp-controller="OpsManager" asp-action="CatalogDelete" asp-route-CatalogID="@item.CatalogID">Delete Catalog Item</a>
+                        </div>
                     </td>
                 </tr>
             }

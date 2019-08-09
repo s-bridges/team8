@@ -101,15 +101,15 @@
             }
         </tbody>
     </table>
+    <div>
+        <a asp-controller="OpsManager" asp-action="OrderByStatus">Return to Orders</a>
+    </div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
 
+    </div>
 </div>
-<div>
-    <a asp-controller="OpsManager" asp-action="OrderByStatus">Return to Orders</a>
-</div>
-<div>
-    <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
 
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

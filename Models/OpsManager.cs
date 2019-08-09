@@ -32,5 +32,7 @@ namespace team8.Models
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string OpsManagerPassword { get; set; }
+
+        public string userType { get; set; }
     }
 }

@@ -102,13 +102,16 @@
             }
         </tbody>
     </table>
+    <div>
+        <a asp-controller="OpsManager" asp-action="cDetails" asp-route-CustomerID="@TempData["CustomerID"]">Return to Customer Details</a>
+    </div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
+    </div>
+
 
 </div>
-<div>
-    <a asp-controller="OpsManager" asp-action="cDetails" asp-route-CustomerID="@TempData["CustomerID"]">Return to Customer Details</a>
-    <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
 
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
