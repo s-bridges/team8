@@ -10,12 +10,16 @@ namespace team8.Models
     {
         [Key]
         public int CatalogID { get; set; }
+        [Required]
         [Display(Name = "Photo")]
         public string ItemPhoto { get; set; }
+        [Required]
         [Display(Name ="Name")]
         public string ItemName { get; set; }
+        [Required]
         [Display(Name = "Stock")]
         public string ItemStock { get; set; }
+        
         [Display(Name = "Price")]
         public decimal ItemPrice { get; set; }
 

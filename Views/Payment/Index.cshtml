@@ -89,9 +89,18 @@
                         @Html.DisplayFor(modelItem => item.CardCVV)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-CardID="@item.CardID" asp-route-CustomerID="@item.CustomerID">Edit</a>
-                        <a asp-action="Details" asp-route-CardID="@item.CardID">Details</a>
-                        <a asp-action="Delete" asp-route-CardID="@item.CardID">Delete</a>
+                        <div>
+                            <a asp-action="Edit" asp-route-CardID="@item.CardID" asp-route-CustomerID="@item.CustomerID">Edit</a>
+
+                        </div>
+                        <div>
+                            <a asp-action="Details" asp-route-CardID="@item.CardID">Details</a>
+
+                        </div>
+                        <div>
+                            <a asp-action="Delete" asp-route-CardID="@item.CardID">Delete</a>
+
+                        </div>
                     </td>
                 </tr>
             }

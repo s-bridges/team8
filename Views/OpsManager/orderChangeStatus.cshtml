@@ -1,0 +1,54 @@
+﻿@model team8.Models.Order
+@{
+    ViewData["Title"] = "Order Status";
+}
+
+<h2>Edit</h2>
+
+<h4>Edit Order Status</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="orderChangeStatus">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <input type="hidden" asp-for="CustomerID" />
+            <input type="hidden" asp-for="OrderID" />
+            <input type="hidden" asp-for="CatalogID" />
+            <input type="hidden" asp-for="Total" />
+            <input type="hidden" asp-for="TotalDue" />
+            <input type="hidden" asp-for="CardID" />
+            <input type="hidden" asp-for="JobType" />
+            <input type="hidden" asp-for="Media" />
+            <input type="hidden" asp-for="Content" />
+            <input type="hidden" asp-for="Quantity" />
+            <input type="hidden" asp-for="PaymentType" />
+
+
+
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label">Order Status</label>
+                <select asp-for="OrderStatus" name="OrderStatus">
+                    <option>- Please select status -</option>
+                    <option value="Received">Received</option>
+                    <option value="Processed">Processed</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Closed Out">Close Out</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-controller="OpsManager" asp-action="orderDetails" asp-route-OrderID="@Model.OrderID">Return to Order Details</a>
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

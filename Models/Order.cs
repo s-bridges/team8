@@ -12,15 +12,20 @@ namespace team8.Models
         public int OrderID { get; set; }
         public int CatalogID { get; set; }
         public int CustomerID { get; set; }
+        [Required]
         [Display(Name = "Job Type")]
         public string JobType{ get; set; }
-        public string Media { get; set; }
 
+        [Required]
+        public string Media { get; set; }
+        [Required]
         public string Content { get; set; }
+        [Required]
         public int Quantity { get; set; }
         public decimal Total { get; set; }
         [Display(Name = "Order Status")]
         public string OrderStatus { get; set; }
+        [Required]
         [Display(Name = "Payment Type")]
         public string PaymentType { get; set; }
 

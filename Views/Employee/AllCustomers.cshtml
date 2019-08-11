@@ -43,10 +43,15 @@
                     @Html.DisplayFor(modelItem => item.CustomerUserName)
                 </td>
                 <td>
+                    <div>
+                        <a asp-controller="Employee" asp-action="CustomerDetails" asp-route-CustomerID="@item.CustomerID">Details</a>
 
-                    <a asp-controller="Employee" asp-action="CustomerDetails" asp-route-CustomerID="@item.CustomerID">Details</a>                    
-                    
-                    <a asp-controller="Employee" asp-action="CustomerDelete" asp-route-CustomerID="@item.CustomerID">Delete</a>
+                    </div>
+                    <div>
+                        <a asp-controller="Employee" asp-action="CustomerDelete" asp-route-CustomerID="@item.CustomerID">Delete</a>
+                    </div>
+
+                   
 
                 </td>
 

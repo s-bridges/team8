@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="order.Media" class="control-label">Media</label>
+                <label asp-for="order.Media" class="control-label">Media (Photo URL)</label>
                 <input asp-for="order.Media" class="form-control" />
                 <span asp-validation-for="order.Media" class="text-danger"></span>
             </div>
@@ -63,7 +63,7 @@
                 <select asp-for="order.PaymentType" name="order.PaymentType">
                     <option>- Please select a type -</option>
                     <option value="PODelivery">Payment on Delivery</option>
-                    <option value="Existing Card">Exsisting Credit Card</option>
+                    <option value="Existing Card">Existing Credit Card</option>
                 </select>
             </div>
 

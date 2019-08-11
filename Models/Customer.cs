@@ -11,23 +11,32 @@ namespace team8.Models
     {
         [Key]
         public int CustomerID { get; set; }
+        [Required]
         [Display(Name = "First Name")]
         public string CustomerFirstName { get; set; }
+        [Required]
         [Display(Name = "Last Name")]
         public string CustomerLastName { get; set; }
+        [Required]
         [Display(Name = "Address")]
         public string CustomerAddress { get; set; }
+        [Required]
         [Display(Name = "City")]
         public string CustomerCity { get; set; }
+        [Required]
         [Display(Name = "State")]
         public string CustomerState { get; set; }
+        [Required]
         [Display(Name = "Zipcode")]
         public int CustomerZipcode { get; set; }
+        [Required]
         [Phone]
         [Display(Name = "Phone Number")]
         public string CustomerPhoneNumber { get; set; }
+        [Required]
         [Display(Name = "User Name")]
         public string CustomerUserName { get; set; }
+        [Required]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string CustomerPassword { get; set; }

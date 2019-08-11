@@ -476,7 +476,58 @@ namespace team8.Controllers
             return View(order);
         }
 
+        //chagne the order status
+        [HttpGet]
+        public IActionResult orderChangeStatus(int? OrderID)
+        {
+            if (OrderID == null)
+            {
+                return NotFound();
+            }
 
+            Order order = objOrder.GetOrderData(OrderID);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return View(order);
+
+        }
+        [HttpPost]
+        public IActionResult orderChangeStatus(int OrderID, [Bind]Order order)
+        {
+            if (OrderID != order.OrderID)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                //get item price
+                Catalog catalog = objCatalog.GetItemPrice(order.CatalogID);
+                decimal itemPrice = Convert.ToDecimal(catalog.ItemPrice);
+
+                //make variables to handle math
+                int quantity = Convert.ToInt32(order.Quantity);
+                decimal podPrice = Convert.ToDecimal(.10);
+
+                //get the total 
+                order.Total = Convert.ToDecimal(quantity * itemPrice);
+
+                //total for payment on delivery
+                if (order.PaymentType == "PODelivery")
+                {
+                    order.TotalDue = podPrice * order.Total;
+                }
+                else
+                {
+                    order.TotalDue = order.Total;
+                }
+
+                objOrder.UpdateOrder(order);
+                return RedirectToAction("orderDetails", "OpsManager", new { order.OrderID });
+            }
+            return View(order);
+        }
 
         //CATALOG ---------------------------------------------------------------------------------
         //controls for catalog 

@@ -88,6 +88,9 @@
         <a asp-controller="OpsManager" asp-action="orderPayment" asp-route-CardID="@Model.CardID">View Payment Method</a>
     </div>
     <div>
+        <a asp-controller="OpsManager" asp-action="orderChangeStatus" asp-route-OrderID ="@Model.OrderID">Change Order Status</a>
+    </div>
+    <div>
         <a asp-controller="OpsManager" asp-action="orderEdit" asp-route-OrderID="@Model.OrderID">Edit</a>
     </div>
     <div>
