@@ -147,7 +147,41 @@ namespace team8.Models
 
         }
 
-    
+        //Get card details
+        public Payment FindCard(int? CardNumber)
+        {
+
+            Payment payment = new Payment();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string SqlQuery = "SELECT * FROM Payment WHERE CardNumber = " + CardNumber;
+
+                SqlCommand cmd = new SqlCommand(SqlQuery, con);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    payment.CardID = Convert.ToInt32(rdr["CardID"]);
+                    payment.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
+                    payment.BillingAddress = rdr["BillingAddress"].ToString();
+                    payment.BillingCity = rdr["BillingCity"].ToString();
+                    payment.BillingSTate = rdr["BillingSTate"].ToString();
+                    payment.BillingZipcode = rdr["BillingZipcode"].ToString();
+                    payment.CardNumber = Convert.ToInt32(rdr["CardNumber"]);
+                    payment.CardType = rdr["CardType"].ToString();
+                    payment.CardName = rdr["CardName"].ToString();
+                    payment.CardExpDate = rdr["CardExpDate"].ToString();
+                    payment.CardCVV = rdr["CardCVV"].ToString();
+
+
+                }
+            }
+            return payment;
+
+        }
+
 
 
         //delete Card 

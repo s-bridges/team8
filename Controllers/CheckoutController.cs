@@ -15,7 +15,6 @@ namespace team8.Controllers
         CatalogDataLayer objCatalog = new CatalogDataLayer();
         PaymentDataLayer objPayment = new PaymentDataLayer();
 
-
         //this is the chekout object that ccontains the models for 
         //all of the other models in order to combine the photos, prices, 
         //payment types of a user ect..ect..
@@ -34,10 +33,11 @@ namespace team8.Controllers
             }
 
             //new view model
-            Checkout checkout = new Checkout();
-            checkout.order = new Order();
-            checkout.catalog = new Catalog();
-            checkout.payment = new Payment();
+            Checkout checkout = new Checkout
+            {
+                order = new Order(),
+                catalog = new Catalog(),
+            };
 
             //fill the form with the required ORDER items
             checkout.order.CustomerID = Session.CustomerID;
@@ -49,19 +49,15 @@ namespace team8.Controllers
             TempData["CatalogID"] = checkout.catalog.CatalogID;
             //get the payment information for display
 
-            checkout.payment.lstPayment = objPayment.GetAllCustomerPayment(Convert.ToInt32(Session.CustomerID)).ToList();
             
 
-            if (checkout.payment.lstPayment == null)
-            {
-                return RedirectToAction("Create", "Payment", Session.CustomerID);
-            }
+
 
 
             return View(checkout);
         }
 
-        //this will post the new order to the data base
+        //this will transfer info to payment page.
         [HttpPost]
         public IActionResult Index([Bind]Checkout checkout)
         {
@@ -89,10 +85,109 @@ namespace team8.Controllers
                 checkout.order.TotalDue = checkout.order.Total;
             }
 
-                objOrder.AddOrder(checkout);
+
+
+            Session.Checkout.catalog = checkout.catalog;
+            Session.Checkout.order = checkout.order;
+
+           // objOrder.AddOrder(checkout);
             
-                return RedirectToAction("Index", "Order", new { Session.CustomerID });
+            return RedirectToAction("cPayment", "Checkout" );
         }
-       
+
+
+        //send info to payment screen
+        public IActionResult cPayment()
+        {
+            //new view model
+            Checkout checkout = new Checkout
+            {
+                order = Session.Checkout.order,
+                catalog = Session.Checkout.catalog,                
+            };
+
+
+            //stuff to display either a list of stored cards or to add a new card to the order. 
+            Payment payment = new Payment();
+            checkout.payment = payment;
+            checkout.payment.lstPayment = objPayment.GetAllCustomerPayment(Convert.ToInt32(Session.CustomerID)).ToList();
+            checkout.payment.CustomerID = Session.CustomerID;
+
+
+
+            return View(checkout);
+
+        }
+
+        //get payment model for finalization
+        [HttpPost]
+        public IActionResult cPayment([Bind]Checkout checkout)
+        {
+            Session.Checkout.order.CardID = Convert.ToInt32(checkout.order.CardID);
+            Session.Checkout.payment = objPayment.GetPaymentData(Convert.ToInt32(checkout.order.CardID));
+            return RedirectToAction("cFinalize", "Checkout");
+        }
+
+        [HttpPost]
+        public IActionResult cPaymentCreate([Bind]Checkout checkout)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                objPayment.AddPayment(checkout.payment);
+
+                checkout.payment = objPayment.FindCard(Convert.ToInt32(checkout.payment.CardNumber));
+                Session.Checkout.payment = checkout.payment;
+                Session.Checkout.order.CardID = Convert.ToInt32(checkout.payment.CardID);
+
+                return RedirectToAction("cFinalize", "Checkout");
+
+            }
+            return View(checkout);
+        }
+
+
+
+
+        // controls for finalization.
+        public IActionResult cFinalize()
+        {
+            //Initialize 
+            Checkout checkout = new Checkout
+            {
+                order = Session.Checkout.order,
+                payment = Session.Checkout.payment,
+                
+            };
+
+            Catalog catalog = new Catalog();
+            checkout.catalog = catalog;
+            checkout.catalog = objCatalog.GetOrderCatalog(Convert.ToInt32(Session.Checkout.order.CatalogID));
+            Session.Checkout.catalog = checkout.catalog;
+
+            return View(checkout);
+        }
+
+        [HttpPost]
+        public IActionResult cFinalize([Bind]Checkout checkout)
+        {
+            checkout.order = Session.Checkout.order;
+            objOrder.AddOrder(checkout);
+            return RedirectToAction("cReceipt", "Checkout");
+        }
+
+        public IActionResult cReceipt()
+        {
+            Checkout checkout = new Checkout
+            {
+                order = Session.Checkout.order,
+                payment = Session.Checkout.payment,
+                catalog = Session.Checkout.catalog
+            };
+
+
+
+            return View(checkout);
+        }
     }
 }

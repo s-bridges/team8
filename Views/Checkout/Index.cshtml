@@ -68,18 +68,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="order.CardID" class="control-label">Card on File</label>
-                <select asp-for="order.CardID" name="order.CardID">
-                    @foreach (var item in Model.payment.lstPayment)
-                    {
-                        <option value="@item.CardID">
-                            "@item.CardNumber.ToString()"
-                            </option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-default" />
+                <input type="submit" value="Continue to Payment" class="btn btn-default" />
             </div>
         </form>
     </div>

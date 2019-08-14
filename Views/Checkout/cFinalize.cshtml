@@ -1,0 +1,171 @@
+﻿@model team8.Models.Checkout
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h2>Review Order Details</h2>
+
+<h3></h3>
+<hr />
+<div class="row">
+    <div class="col">
+        <form asp-action="cFinalize">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>@Html.DisplayFor(model => model.catalog.ItemName)</h4>
+                        <img src="@Html.DisplayFor(model => model.catalog.ItemPhoto)" height="200" width="200" />
+                    </div>
+                    <div class="col-md-4" >
+                        <h4>Cart</h4>                        
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.catalog.ItemPrice)
+                                    </td>
+                                    <td>
+                                        $@Html.DisplayFor(model => model.catalog.ItemPrice)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.order.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.order.Quantity)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.order.Total)
+                                    </td>
+                                    <td>
+                                        $@Html.DisplayFor(model => model.order.Total)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.order.PaymentType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.order.PaymentType)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.order.TotalDue)
+                                    </td>
+                                    <td>
+                                        $@Html.DisplayFor(model => model.order.TotalDue)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <h4>Description</h4>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.order.JobType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.order.JobType)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.order.Media)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.order.Media)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.order.Content)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.order.Content)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr />
+
+                        <h4>Payment Method</h4>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.payment.CardType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.payment.CardType)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.payment.CardName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.payment.CardName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.payment.CardNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.payment.CardNumber)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.payment.CardExpDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.payment.CardExpDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.payment.CardCVV)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.payment.CardCVV)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+            
+            <div class="form-group">
+                <input type="submit" value="Submit Order" class="btn btn-default" />
+            </div>
+
+        </form>
+        <a asp-controller="Catalog" asp-action="Index">Cancel Order</a>
+    </div>
+</div>
+<div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,117 @@
+﻿@model team8.Models.Checkout
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Payment Information</h2>
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <hr />
+        @if (Model.payment.lstPayment.Count() != 0)
+        {
+            <h4>Use Existing Credit Card</h4>
+            <form asp-action="cPayment">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="order.CardID" class="control-label">Card on File</label>
+                    <select asp-for="order.CardID" name="order.CardID">
+                        @foreach (var item in Model.payment.lstPayment)
+                        {
+                            <option value="@item.CardID">
+                                "@item.CardNumber.ToString()"
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </form>
+        }
+    </div>
+</div>
+
+<hr />
+<h4>Create New Payment Method</h4>
+
+<div class="row">
+    <div class="col">
+        <form asp-action="cPaymentCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="payment.CustomerID" />
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <h5>Billing Information</h5>
+                        <div class="form-group">
+                            <label asp-for="payment.BillingAddress" class="control-label">Address</label>
+                            <input asp-for="payment.BillingAddress" class="form-control" />
+                            <span asp-validation-for="payment.BillingAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payment.BillingCity" class="control-label">City</label>
+                            <input asp-for="payment.BillingCity" class="form-control" />
+                            <span asp-validation-for="payment.BillingCity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payment.BillingSTate" class="control-label">State</label>
+                            <input asp-for="payment.BillingSTate" class="form-control" />
+                            <span asp-validation-for="payment.BillingSTate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payment.BillingZipcode" class="control-label">zipcode</label>
+                            <input asp-for="payment.BillingZipcode" class="form-control" />
+                            <span asp-validation-for="payment.BillingZipcode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="payment.CardType" class="control-label">Card Type</label>
+                            <select asp-for="payment.CardType" name="payment.CardType">
+                                <option>- Please select a type -</option>
+                                <option value="MasterCard">MasterCard</option>
+                                <option value="Discover">Discover</option>
+                                <option value="American Express">American Express</option>
+                                <option value="Visa">Visa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payment.CardNumber" class="control-label">Creditcard Number</label>
+                            <input asp-for="payment.CardNumber" class="form-control" />
+                            <span asp-validation-for="payment.CardNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payment.CardName" class="control-label">Name on Card</label>
+                            <input asp-for="payment.CardName" class="form-control" />
+                            <span asp-validation-for="payment.CardName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payment.CardExpDate" class="control-label">Experation Date</label>
+                            <input asp-for="payment.CardExpDate" class="form-control" />
+                            <span asp-validation-for="payment.CardExpDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="payment.CardCVV" class="control-label">CVV</label>
+                            <input asp-for="payment.CardCVV" class="form-control" />
+                            <span asp-validation-for="payment.CardCVV" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
