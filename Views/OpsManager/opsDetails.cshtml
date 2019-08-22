@@ -6,7 +6,7 @@
 
 <h2>Details</h2>
 <div>
-    <h4>Employee</h4>
+    <h4>Operations Manager</h4>
     <hr />
     <dl class="dl-horizontal">
 
@@ -73,10 +73,11 @@
 
 
     </dl>
-    <a asp-controller="OpsManager" asp-action="opsEdit" asp-route-OpsManagerID="@Model.OpsManagerID">Edit Information</a>
+    <div>
+        <a asp-controller="OpsManager" asp-action="opsEdit" asp-route-OpsManagerID="@Model.OpsManagerID">Edit Information</a>
+    </div>
 </div>
 <div>
-
     <a asp-controller="OpsManager" asp-action="Index">Back to My Account</a>
 </div>
 @section Scripts {

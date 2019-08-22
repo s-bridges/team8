@@ -58,19 +58,17 @@
         <dd>
             @Html.DisplayFor(model => model.CustomerUserName)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPassword)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPassword)
+        </dd>
     </dl>
 </div>
+
 <div>
-    <a asp-controller="OpsManager" asp-action="cOrders" asp-route-CustomerID="@Model.CustomerID">View Orders</a>
-</div>
-<div>
-    <a asp-controller="OpsManager" asp-action="cPayments" asp-route-CustomerID="@Model.CustomerID">View Payment Information</a>
-</div>
-<div>
-    <a asp-controller="OpsManager" asp-action="cDelete" asp-route-CustomerID="@Model.CustomerID">Delete Customer</a>
-</div>
-<div>
-    <a asp-controller="OpsManager" asp-action="AllCustomer">Back to List</a>
+    <a asp-controller="OpsManager" asp-action="AllUsers">Back to List</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

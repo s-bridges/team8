@@ -11,6 +11,7 @@ namespace team8
         static int customerID;
         static int employeeID;
         static int opsManagerID;
+        static int catalogID;
 
         public static int CustomerID
         {
@@ -45,6 +46,18 @@ namespace team8
                 opsManagerID = value;
             }
         }
+        public static int CatalogID
+        {
+            get
+            {
+                return catalogID;
+            }
+            set
+            {
+                catalogID = value;
+            }
+        }
+
         public static class Checkout
         {
             public static Order order { get; set; }
@@ -53,6 +66,18 @@ namespace team8
             public static Payment payment { get; set; }
         }
 
+        public static class Users
+        {
+            public static string userType { get; set; }
+            public static  Customer customer { get; set; }
+            public static  Employee employee { get; set; }
+            public static  OpsManager opsManager { get; set; }
+
+            public static IEnumerable<Customer> _lstCustomers { get; set; }
+            public static IEnumerable<Employee> _lstEmployees { get; set; }
+            public static IEnumerable<OpsManager> _lstOps { get; set; }
+        }
+ 
 
 
 

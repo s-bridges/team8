@@ -1,17 +1,16 @@
 ﻿@model team8.Models.Order
-@{ 
-    ViewData["Title"] = "Edit";
+@{
+    ViewData["Title"] = "Reciept";
 }
 
-<h2>Edit</h2>
+<h2>Edit Order</h2>
 
-<h4>Edit Order Request</h4>
+
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col">
         <form asp-action="orderEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
 
             <input type="hidden" asp-for="CustomerID" />
             <input type="hidden" asp-for="OrderID" />
@@ -20,62 +19,163 @@
             <input type="hidden" asp-for="TotalDue" />
             <input type="hidden" asp-for="CardID" />
 
-            <div class="form-group">
-                <label asp-for="JobType" class="control-label">Job Type</label>
-                <select asp-for="JobType" name="JobType">
-                    <option>- Please select a type -</option>
-                    <option value="Print">Print</option>
-                    <option value="Engraving">Engraving</option>
-                </select>
-            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>@Html.DisplayFor(model => model.catalog.ItemName)</h4>
+                        <img src="@Html.DisplayFor(model => model.catalog.ItemPhoto)" height="200" width="200" />
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Total</h4>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.catalog.ItemPrice)
+                                    </td>
+                                    <td>
+                                        $@Html.DisplayFor(model => model.catalog.ItemPrice)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Quantity)
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input asp-for="Quantity" class="form-control" />
+                                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                                        </div>
 
-            <div class="form-group">
-                <label asp-for="Media" class="control-label">Media</label>
-                <input asp-for="Media" class="form-control" />
-                <span asp-validation-for="Media" class="text-danger"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Total)
+                                    </td>
+                                    <td>
+                                        $@Html.DisplayFor(model => model.Total)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.PaymentType)
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select asp-for="PaymentType" name="PaymentType">
+                                                <option>- Please select a type -</option>
+                                                <option value="PODelivery">Payment on Delivery</option>
+                                                <option value="Existing Card">Exsisting Credit Card</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.TotalDue)
+                                    </td>
+                                    <td>
+                                        $@Html.DisplayFor(model => model.TotalDue)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.OrderStatus)
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select asp-for="OrderStatus" name="OrderStatus">
+                                                <option>- Please select status -</option>
+                                                <option value="Received">Received</option>
+                                                <option value="Processed">Processed</option>
+                                                <option value="Completed">Completed</option>
+                                                <option value="Shipped">Shipped</option>
+                                                <option value="Closed Out">Close Out</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+            <hr />
 
-            <div class="form-group">
-                <label asp-for="Content" class="control-label">Content</label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
 
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label">Quantity</label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
+                        <h4>Description</h4>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.OrderID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.OrderID)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.JobType)
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select asp-for="JobType" name="JobType">
+                                                <option>- Please select a type -</option>
+                                                <option value="Print">Print</option>
+                                                <option value="Engraving">Engraving</option>
+                                            </select>
+                                        </div>
 
-            <div class="form-group">
-                <label asp-for="PaymentType" class="control-label">Payment Type</label>
-                <select asp-for="PaymentType" name="PaymentType">
-                    <option>- Please select a type -</option>
-                    <option value="PODelivery">Payment on Delivery</option>
-                    <option value="Existing Card">Exsisting Credit Card</option>
-                </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Media)
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input asp-for="Media" class="form-control" />
+                                            <span asp-validation-for="Media" class="text-danger"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Content)
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input asp-for="Content" class="form-control" />
+                                            <span asp-validation-for="Content" class="text-danger"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default" />
+                </div>
             </div>
-
-            <div class="form-group">
-                <label asp-for="OrderStatus" class="control-label">Order Status</label>
-                <select asp-for="OrderStatus" name="OrderStatus">
-                    <option>- Please select status -</option>
-                    <option value="Received">Received</option>
-                    <option value="Processed">Processed</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Closed Out">Close Out</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-default" />
-            </div>
+            <hr />
         </form>
+
     </div>
-    <a asp-controller="OpsManager" asp-action="orderDetails" asp-route-OrderID ="@Model.OrderID">Return to Order Details</a>
 </div>
 <div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="cOrders" asp-route-CustomerID="@Model.CustomerID">Back to List</a>
+    </div>
+    <div>
+        <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
+    </div>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

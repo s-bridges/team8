@@ -21,15 +21,12 @@ namespace team8.Controllers
         [HttpGet]
         public IActionResult Index(int? CatalogID)
         {
-            if (CatalogID == null)
-            {
-                return NotFound();
-            }
+
             if (Session.CustomerID == 0)
             {
-                TempData["URL"] = Request.Path.ToString();
-                return RedirectToAction("Index", "Login");
-
+                int cat = Convert.ToInt32(CatalogID);
+                Session.CatalogID = cat;
+                return RedirectToAction("cLogin", "Login");
             }
 
             //new view model
@@ -41,7 +38,19 @@ namespace team8.Controllers
 
             //fill the form with the required ORDER items
             checkout.order.CustomerID = Session.CustomerID;
-            checkout.order.CatalogID = Convert.ToInt32(CatalogID);
+            if (Session.CatalogID == 0)
+            {
+                checkout.order.CatalogID = Convert.ToInt32(CatalogID);
+                checkout.catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            }
+            else
+            {
+                checkout.order.CatalogID = Session.CatalogID;
+                CatalogID = Session.CatalogID;
+                checkout.catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            }
 
             //get the CATALOG items
             //item price
@@ -184,7 +193,6 @@ namespace team8.Controllers
                 payment = Session.Checkout.payment,
                 catalog = Session.Checkout.catalog
             };
-
 
 
             return View(checkout);

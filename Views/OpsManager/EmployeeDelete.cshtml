@@ -1,4 +1,4 @@
-﻿@model team8.Models.Customer
+﻿@model team8.Models.Employee
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,26 +11,26 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerFirstName)
+            @Html.DisplayNameFor(model => model.EmployeeFirstName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CustomerFirstName)
+            @Html.DisplayFor(model => model.EmployeeFirstName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerLastName)
+            @Html.DisplayNameFor(model => model.EmployeeLastName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CustomerLastName)
+            @Html.DisplayFor(model => model.EmployeeLastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerUserName)
+            @Html.DisplayNameFor(model => model.EmployeeID)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CustomerUserName)
+            @Html.DisplayFor(model => model.EmployeeID)
         </dd>
     </dl>
-    <form asp-action="cDelete">
-        <input type="hidden" asp-for="CustomerID" />
+    <form asp-action="EmployeeDelete">
+        <input type="hidden" asp-for="EmployeeID" />
         <input type="submit" value="Delete" class="btn btn-default" />
 
     </form>

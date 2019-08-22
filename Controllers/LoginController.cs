@@ -75,6 +75,63 @@ namespace team8.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult cLogin()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult cLogin(string UserName, string Password, string UserType)
+        {
+            if (ModelState.IsValid)
+            {
+                if (UserType == null || UserType == "Customer")
+                {
+                    Customer customer = objLogin.CustomerLogin(UserName, Password);
+
+                    if (customer.CustomerID != 0)
+                    {
+                        Session.CustomerID = customer.CustomerID;
+                        return RedirectToAction("Index", "Checkout");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                if (UserType == "Employee")
+                {
+                    Employee employee = objLogin.EmployeeLogin(UserName, Password);
+
+                    if (employee.EmployeeID != 0)
+                    {
+                        Session.EmployeeID = employee.EmployeeID;
+                        return RedirectToAction("Index", "Employee", new { employee.EmployeeID });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                if (UserType == "OpsManager")
+                {
+                    OpsManager opsManager = objLogin.OpsManagerLogin(UserName, Password);
+
+                    if (opsManager.OpsManagerID != 0)
+                    {
+                        Session.EmployeeID = opsManager.OpsManagerID;
+                        return RedirectToAction("Index", "OpsManager", new { opsManager.OpsManagerID });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+
+            }
+
+            return RedirectToAction("Index");
+        }
 
     }
 }

@@ -16,8 +16,14 @@ namespace team8.Controllers
 
         public IActionResult Index()
         {
-             
-            return View();
+            AllUsers users = new AllUsers
+            {
+                _lstCustomers = objCustomer.GetAllCustomers().ToList(),
+                _lstEmployees = objEmployee.GetAllEmployees().ToList(),
+                _lstOps = objOps.GetAllOps().ToList()
+            };
+
+            return View(users);
         }
 
         [HttpPost]
@@ -25,20 +31,43 @@ namespace team8.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (userType == null || userType == "C")
+                AllUsers users = new AllUsers();
+                if (userType == "A")
                 {
-                    return RedirectToAction("AllCustomers");
 
+                    users._lstCustomers = objCustomer.GetAllCustomers().ToList();
+                    users._lstEmployees = objEmployee.GetAllEmployees().ToList();
+                    users._lstOps = objOps.GetAllOps().ToList();
+                   
+
+                    return View(users);
+                }
+                if (userType == "C")
+                {
+
+                    users._lstCustomers = objCustomer.GetAllCustomers().ToList();
+                    users._lstEmployees = null;
+                    users._lstOps = null;
+
+
+                    return View(users);
                 }
                 if (userType == "E")
                 {
-                    return RedirectToAction("AllEmployees");
+                    users._lstEmployees = objEmployee.GetAllEmployees().ToList();
+                    users._lstCustomers = null;
+                    users._lstOps = null;
+
+                    return View(users);
 
                 }
                 if (userType == "O")
                 {
-                    return RedirectToAction("AllOps");
+                    users._lstOps = objOps.GetAllOps().ToList();
+                    users._lstCustomers = null;
+                    users._lstEmployees = null;
 
+                    return View(users);
                 }
 
             }
@@ -46,38 +75,5 @@ namespace team8.Controllers
             return RedirectToAction("Index");
         }
 
-        //show the customers
-        [HttpGet]
-        public IActionResult AllCustomers()
-        {
-
-            List<Customer> lstCustomer = new List<Customer>();
-            lstCustomer = objCustomer.GetAllCustomers().ToList();
-
-            return View(lstCustomer);
-
-        }
-
-        //show all employees
-        [HttpGet]
-        public IActionResult AllEmployees()
-        {
-
-            List<Employee> lstEmployee = new List<Employee>();
-            lstEmployee = objEmployee.GetAllEmployees().ToList();
-
-            return View(lstEmployee);
-
-        }
-        [HttpGet]
-        public IActionResult AllOps()
-        {
-
-            List<OpsManager> lstOps= new List<OpsManager>();
-            lstOps = objOps.GetAllOps().ToList();
-
-            return View(lstOps);
-
-        }
     }
 }

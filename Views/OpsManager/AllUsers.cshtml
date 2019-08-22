@@ -1,21 +1,21 @@
-﻿@model team8.Models.OpsManager
+﻿@model team8.Models.AllUsers
 @{
     ViewData["Title"] = "View Users";
 }
 
-<h2>View All Users</h2>
+<h2>Users</h2>
 
-<h4>Select User Type</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AllUsers">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <h4>Select User Type</h4>
             <div class="form-group">
-                <label asp-for="userType" class="control-label">User Type</label>
                 <select asp-for="userType" name="userType">
                     <option>- Please select a type -</option>
+                    <option value="A">All Users</option>
                     <option value="C">Customers</option>
                     <option value="E">Employees</option>
                     <option value="O">Operations Manager</option>
@@ -25,13 +25,311 @@
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-default" />
             </div>
-            <div>
-                <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
-            </div>
         </form>
+        <hr />
+
+        @if (Model._lstCustomers != null)
+        {
+            <h4>Customers</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <label class="control-label">ID</label>
+                        </th>
+                        <th>
+                            <label class="control-label">First Name</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Last Name</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Address</label>
+                        </th>
+                        <th>
+                            <label class="control-label">City</label>
+                        </th>
+                        <th>
+                            <label class="control-label">State</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Zipcode</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Phone Number</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Username</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Password</label>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model._lstCustomers)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerFirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerLastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerCity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerState)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerZipcode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerPhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerUserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerPassword)
+                            </td>
+                            <td>
+                                <div>
+                                    <a asp-controller="OpsManager" asp-action="cDetails" asp-route-CustomerID="@item.CustomerID">Details</a>
+                                </div>
+                                <div>
+                                    <a asp-controller="OpsManager" asp-action="cOrders" asp-route-CustomerID="@item.CustomerID">Orders</a>
+                                </div>
+                                <div>
+                                    <a asp-controller="OpsManager" asp-action="cPayments" asp-route-CustomerID="@item.CustomerID">Payments</a>
+                                </div>
+                                <div>
+                                    <a asp-controller="OpsManager" asp-action="cDelete" asp-route-CustomerID="@item.CustomerID">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <hr />
+        }
+
+        @if (Model._lstEmployees != null)
+        {
+            <h4>Employees</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <label class="control-label">ID</label>
+                        </th>
+                        <th>
+                            <label class="control-label">First Name</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Last Name</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Address</label>
+                        </th>
+                        <th>
+                            <label class="control-label">City</label>
+                        </th>
+                        <th>
+                            <label class="control-label">State</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Zipcode</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Phone Number</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Job title</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Username</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Password</label>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model._lstEmployees)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeFirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeCity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeState)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeZipcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeePhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeUserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeePassword)
+                        </td>
+                        <td>
+                            <div>
+                                <a asp-controller="OpsManager" asp-action="EmployeeDetails" asp-route-EmployeeID="@item.EmployeeID">Details</a>
+                            </div>
+                            <div>
+                                <a asp-controller="OpsManager" asp-action="EmployeeEdit" asp-route-EmployeeID="@item.EmployeeID">Edit</a>
+                            </div>
+                            <div>
+                                <a asp-controller="OpsManager" asp-action="EmployeeDelete" asp-route-EmployeeID="@item.EmployeeID">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+            <p>
+                <a asp-action="EmployeeCreate">Create New Employee</a>
+            </p>
+            <hr />
+
+        }
+
+        @if (Model._lstOps != null)
+        {
+            <h4>Operations Managers</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <label class="control-label">ID</label>
+                        </th>
+                        <th>
+                            <label class="control-label">First Name</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Last Name</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Address</label>
+                        </th>
+                        <th>
+                            <label class="control-label">City</label>
+                        </th>
+                        <th>
+                            <label class="control-label">State</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Zipcode</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Phone Number</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Job title</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Username</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Password</label>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model._lstOps)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerFirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerCity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerState)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerZipcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerPhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerUserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OpsManagerPassword)
+                        </td>
+                        <td>
+                            <div>
+                                <a asp-controller="OpsManager" asp-action="opsDetails" asp-route-OpsManagerID="@item.OpsManagerID">Details</a>
+                            </div>
+                            <div>
+                                <a asp-controller="OpsManager" asp-action="opsEdit" asp-route-OpsManagerID="@item.OpsManagerID">Edit</a>
+                            </div>
+                            <div>
+                                <a asp-controller="OpsManager" asp-action="opsDelete" asp-route-OpsManagerID="@item.OpsManagerID">Delete</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+            <p>
+                <a asp-action="opsCreate">Create New Operations Manager</a>
+            </p>
+            <hr/>
+        }
     </div>
 </div>
 <div>
+    <a asp-action="Index">Return to My Account</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

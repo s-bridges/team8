@@ -9,30 +9,66 @@
 <h3>Welcome @Html.DisplayFor(model => model.OpsManagerFirstName) </h3>
 
 
-<div>
-    <div>
-        <a asp-controller="OpsManager" asp-action="AllUsers">Users</a>
-    </div>
+<hr />
+<div class="row">
+    <div class="col">
 
-    <div>
-        <a asp-controller="OpsManager" asp-action="orderByStatus">Orders</a>
-    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h4>Users</h4>
+                    <a asp-controller="OpsManager" asp-action="AllUsers">View Users</a>
+                    <p>                        
+                        <div>
+                            <a asp-action="EmployeeCreate">Create New Employee</a>
+                        </div>
+                        <div>
+                            <a asp-action="opsCreate">Create New Operations Manager</a>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr />
 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h4>Orders</h4>
+                    <a asp-controller="OpsManager" asp-action="AllOrders">View Orders</a>
+
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h4>Product Catalog</h4>
+                    <div>
+                        <a asp-controller="OpsManager" asp-action="Catalog">View Catalog</a>
+                    </div>
+                    <div>
+                        <a asp-controller="OpsManager" asp-action="CatalogCreate">Create New Catalog Entry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h4>My Information</h4>
+                    <div>
+                        <a asp-controller="OpsManager" asp-action="opsDetails" asp-route-OpsManagerID="@Model.OpsManagerID">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
-    <div>
-        <a asp-controller="OpsManager" asp-action="Catalog">Catalog</a>
-    </div>
-</div>
-
-<div>
-    <div>
-        <a asp-controller="OpsManager" asp-action="opsDetails" asp-route-OpsManagerID="@Model.OpsManagerID">My Information</a>
-    </div>
-</div>
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

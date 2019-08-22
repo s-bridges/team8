@@ -13,21 +13,21 @@ namespace team8.Controllers
     {
         OrderDataLayer objOrder = new OrderDataLayer();
         CatalogDataLayer objCatalog = new CatalogDataLayer();
+        PaymentDataLayer objPayment = new PaymentDataLayer();
+        CustomerDataAccessLayer objCustomer = new CustomerDataAccessLayer();
 
-
-
-        //shows all orders for a customer
+        //all orders for a customer
         [HttpGet]
-        public IActionResult Index(int CustomerID) 
+        public IActionResult Index(int CustomerID)
         {
-            List<Order> lstOrder = new List<Order>();
-            lstOrder = objOrder.GetAllCustomerOrder(CustomerID).ToList();
+            Order order = new Order();
+            order._lstOrders = objOrder.GetAllCustomerOrder(Convert.ToInt32(CustomerID));
 
-            if (lstOrder != null)
+            if (order._lstOrders != null)
             {
                 TempData["CustomerID"] = CustomerID;
-                
-                return View(lstOrder);
+
+                return View(order);
             }
 
             else
@@ -36,6 +36,28 @@ namespace team8.Controllers
             }
 
         }
+        [HttpPost]
+        public IActionResult Index(int CustomerID, string orderType)
+        {
+            if (ModelState.IsValid)
+            {
+                Order order = new Order();
+
+                if (orderType == "A")
+                {
+                    order._lstOrders = objOrder.GetAllCustomerOrder(Convert.ToInt32(CustomerID));
+                    return View(order);
+                }
+                else
+                {
+                    order._lstOrders = objOrder.CustomerOrderStatus(CustomerID, orderType);
+                    return View(order);
+                }
+            }
+
+            return View();
+        }
+
 
         //show details for one order
         [HttpGet]
@@ -46,14 +68,24 @@ namespace team8.Controllers
                 return NotFound();
             }
 
-
             Order order = objOrder.GetOrderData(OrderID);
-
+                                 
 
             if (order == null)
             {
                 return NotFound();
             }
+
+            int CardID = order.CardID;
+            order.payment = objPayment.GetPaymentData(CardID);
+
+            int CatalogID = order.CatalogID;
+            order.catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            int CustomerID = order.CustomerID;
+            order.customer = objCustomer.GetCustomerData(CustomerID);
+
+
 
             return View(order);
         }

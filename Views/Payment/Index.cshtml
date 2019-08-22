@@ -9,7 +9,13 @@
 }
 
 <h2>Payment</h2>
-<h4>Credit Cards on file. </h4>
+
+<hr />
+<div>
+    <a asp-controller="Payment" asp-action="Create" asp-route-CustomerID="@TempData["CustomerID"]">Create New Payment Method</a>
+</div>
+<hr />
+<h4>Credit cards on file. </h4>
 
 <div>
 
@@ -20,26 +26,12 @@
                     @Html.DisplayNameFor(model => model.CardID)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CustomerID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BillingAddress)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BillingCity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BillingSTate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BillingZipcode)
+                    @Html.DisplayNameFor(model => model.CardType)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CardNumber)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CardType)
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.CardName)
                 </th>
@@ -54,62 +46,46 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CardID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BillingAddress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BillingCity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BillingSTate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BillingZipcode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CardNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CardType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CardName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CardExpDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CardCVV)
-                    </td>
-                    <td>
-                        <div>
-                            <a asp-action="Edit" asp-route-CardID="@item.CardID" asp-route-CustomerID="@item.CustomerID">Edit</a>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardID)
+                </td>
 
-                        </div>
-                        <div>
-                            <a asp-action="Details" asp-route-CardID="@item.CardID">Details</a>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardExpDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardCVV)
+                </td>
+                <td>
+                    <div>
+                        <a asp-action="Edit" asp-route-CardID="@item.CardID" asp-route-CustomerID="@item.CustomerID">Edit</a>
 
-                        </div>
-                        <div>
-                            <a asp-action="Delete" asp-route-CardID="@item.CardID">Delete</a>
+                    </div>
+                    <div>
+                        <a asp-action="Details" asp-route-CardID="@item.CardID">Details</a>
 
-                        </div>
-                    </td>
-                </tr>
+                    </div>
+                    <div>
+                        <a asp-action="Delete" asp-route-CardID="@item.CardID">Delete</a>
+
+                    </div>
+                </td>
+            </tr>
             }
 
         </tbody>
     </table>
-    <div>
-        <a asp-controller="Payment" asp-action="Create" asp-route-CustomerID="@TempData["CustomerID"]">New Payment</a>
-    </div>
+
     <div>
         <a asp-controller="Customer" asp-action="Index" asp-route-CustomerID="@TempData["CustomerID"]">Return to My Account</a>
     </div>
@@ -117,6 +93,6 @@
 
 <div>
 </div>
- @section Scripts {
-            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-        }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

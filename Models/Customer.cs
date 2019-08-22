@@ -45,7 +45,9 @@ namespace team8.Models
         //creating the one to many relationship!!
         public ICollection<Payment> Payment { get; set; }
         public ICollection<Order> Order { get; set; }
-      
+        public IEnumerable<Order> _lstOrders { get; set; }
+
+
 
     }
 }

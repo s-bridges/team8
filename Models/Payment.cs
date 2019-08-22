@@ -39,7 +39,7 @@ namespace team8.Models
         [Display(Name = "Name on Card")]
         public string CardName { get; set; }
         [Required]
-        [Display(Name = "Experation Date")]
+        [Display(Name = "Expiration Date")]
         public string CardExpDate { get; set; }
         [Required]
         [Display(Name = "CVV (3-Digit Code)")]

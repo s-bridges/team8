@@ -24,5 +24,7 @@ namespace team8.Models
         public decimal ItemPrice { get; set; }
 
         public virtual Order order { get; set; }
+
+        public IEnumerable<Catalog> _lstCatalog { get; set; }
     }
 }

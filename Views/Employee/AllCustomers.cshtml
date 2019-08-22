@@ -48,10 +48,12 @@
 
                     </div>
                     <div>
+                        <a asp-controller="Employee" asp-action="CustomerOrders" asp-route-CustomerID="@item.CustomerID">Orders</a>
+                    </div>
+                    <div>
                         <a asp-controller="Employee" asp-action="CustomerDelete" asp-route-CustomerID="@item.CustomerID">Delete</a>
                     </div>
 
-                   
 
                 </td>
 

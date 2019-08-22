@@ -145,12 +145,13 @@ namespace team8.Controllers
         [HttpGet]
         public IActionResult AllOrders()
         {
-            List<Order> lstOrder = new List<Order>();
-            lstOrder = objOrder.GetAllOrder().ToList();
+            Order order = new Order();
+            order._lstOrders = objOrder.GetAllOrder().ToList();
 
-            if (lstOrder != null)
+
+            if (order._lstOrders != null)
             {
-                return View(lstOrder);
+                return View(order);
             }
 
             else
@@ -159,6 +160,27 @@ namespace team8.Controllers
             }
 
         }
+        [HttpPost]
+        public IActionResult AllOrders(string orderType)
+        {
+            if (ModelState.IsValid)
+            {
+                Order order = new Order();
+
+                if (orderType == "A")
+                {
+                    order._lstOrders = objOrder.GetAllOrder();
+                    return View(order);
+                }
+                else
+                {
+                    order._lstOrders = objOrder.OrderStatus(orderType);
+                    return View(order);
+                }
+            }
+            return View();
+        }
+
 
         //details for a single order
         [HttpGet]
@@ -171,12 +193,21 @@ namespace team8.Controllers
 
 
             Order order = objOrder.GetOrderData(OrderID);
-
+            TempData["OrderID"] = order.OrderID;
 
             if (order == null)
             {
                 return NotFound();
             }
+
+            int CardID = order.CardID;
+            order.payment = objPayment.GetPaymentData(CardID);
+
+            int CatalogID = order.CatalogID;
+            order.catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            int CustomerID = order.CustomerID;
+            order.customer = objCustomer.GetCustomerData(CustomerID);
 
             return View(order);
         }
@@ -184,14 +215,14 @@ namespace team8.Controllers
         [HttpGet]
         public IActionResult CustomerOrders(int CustomerID)
         {
-            List<Order> lstOrder = new List<Order>();
-            lstOrder = objOrder.GetAllCustomerOrder(CustomerID).ToList();
+            Order order = new Order();
+            order._lstOrders = objOrder.GetAllCustomerOrder(Convert.ToInt32(CustomerID));
 
-            if (lstOrder != null)
+            if (order._lstOrders != null)
             {
                 TempData["CustomerID"] = CustomerID;
 
-                return View(lstOrder);
+                return View(order);
             }
 
             else
@@ -199,6 +230,27 @@ namespace team8.Controllers
                 return View();
             }
 
+        }
+        [HttpPost]
+        public IActionResult CustomerOrders(int CustomerID, string orderType)
+        {
+            if (ModelState.IsValid)
+            {
+                Order order = new Order();
+
+                if (orderType == "A")
+                {
+                    order._lstOrders = objOrder.GetAllCustomerOrder(Convert.ToInt32(CustomerID));
+                    return View(order);
+                }
+                else
+                {
+                    order._lstOrders = objOrder.CustomerOrderStatus(CustomerID, orderType);
+                    return View(order);
+                }
+            }
+
+            return View();
         }
 
         //---------------------------------------------------

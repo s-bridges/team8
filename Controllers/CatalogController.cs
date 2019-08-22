@@ -15,12 +15,26 @@ namespace team8.Controllers
 
         public IActionResult Index()
         {
-            List<Catalog> lstCatalog = new List<Catalog>();
-            lstCatalog = objCatalog.GetAllItems().ToList();
+            Catalog catalog = new Catalog();
+            catalog._lstCatalog = objCatalog.GetAllItems().ToList();
 
-
-            return View(lstCatalog);
+            return View(catalog);
         }
+        [HttpPost]
+        public IActionResult Index(string ItemName)
+        {
+            Catalog catalog = new Catalog();
+            char firstLetter;
+
+            firstLetter = ItemName[0];
+
+
+            ///truncate and then Search
+            catalog._lstCatalog = objCatalog.GetCatalogName(firstLetter);
+
+            return View(catalog);
+        }
+
 
         [HttpGet]
         public IActionResult Details(int? CatalogID)

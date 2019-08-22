@@ -212,5 +212,78 @@ namespace team8.Models
             return lstOrder;
         }
 
+        public IEnumerable<Order> CustomerOrderStatus(int CustomerID, string orderStatus)
+        {
+            List<Order> lstOrder = new List<Order>();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string SqlQuery = "SELECT * FROM OrderInformation WHERE CustomerID = " + CustomerID + "AND OrderStatus = " + orderStatus;
+                SqlCommand cmd = new SqlCommand(SqlQuery, con);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Order order = new Order();
+
+                    order.OrderID = Convert.ToInt32(rdr["OrderID"]);
+                    order.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
+                    order.CatalogID = Convert.ToInt32(rdr["CatalogID"]);
+                    order.JobType = rdr["JobType"].ToString();
+                    order.Media = rdr["Media"].ToString();
+                    order.Content = rdr["Content"].ToString();
+                    order.Quantity = Convert.ToInt32(rdr["Quantity"]);
+                    order.Total = Convert.ToDecimal(rdr["Total"]);
+                    order.OrderStatus = rdr["OrderStatus"].ToString();
+                    order.PaymentType = rdr["PaymentType"].ToString();
+                    order.CardID = Convert.ToInt32(rdr["CardID"]);
+                    order.TotalDue = Convert.ToDecimal(rdr["TotalDue"]);
+
+                    lstOrder.Add(order);
+                }
+                con.Close();
+            }
+            return lstOrder;
+        }
+
+        //get details for a single order
+        public Order Search(int CustomerID, int OrderID)
+        {
+
+            Order order = new Order();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string SqlQuery = "SELECT * FROM OrderInformation WHERE CustomerID = " + CustomerID + "AND OrderID = " + OrderID;
+
+                SqlCommand cmd = new SqlCommand(SqlQuery, con);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    order.OrderID = Convert.ToInt32(rdr["OrderID"]);
+                    order.CustomerID = Convert.ToInt32(rdr["CustomerID"]);
+                    order.CatalogID = Convert.ToInt32(rdr["CatalogID"]);
+                    order.JobType = rdr["JobType"].ToString();
+                    order.Media = rdr["Media"].ToString();
+                    order.Content = rdr["Content"].ToString();
+                    order.Quantity = Convert.ToInt32(rdr["Quantity"]);
+                    order.Total = Convert.ToDecimal(rdr["Total"]);
+                    order.OrderStatus = rdr["OrderStatus"].ToString();
+                    order.PaymentType = rdr["PaymentType"].ToString();
+                    order.CardID = Convert.ToInt32(rdr["CardID"]);
+                    order.TotalDue = Convert.ToDecimal(rdr["TotalDue"]);
+
+
+
+                }
+            }
+            return order;
+
+        }
     }
 }

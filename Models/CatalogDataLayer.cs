@@ -163,5 +163,40 @@ namespace team8.Models
             }
         }
 
+        //get one item
+        public IEnumerable<Catalog> GetCatalogName(char ItemName)
+        {
+
+            List<Catalog> lstCatalog = new List<Catalog>();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string SqlQuery = "SELECT * FROM ItemCatalog WHERE ItemName LIKE '"+ ItemName + "%'";
+
+                SqlCommand cmd = new SqlCommand(SqlQuery, con);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Catalog catalog = new Catalog();
+
+                    catalog.CatalogID = Convert.ToInt32(rdr["CatalogID"]);
+                    catalog.ItemName = rdr["ItemName"].ToString();
+                    //get the image
+                    catalog.ItemPhoto = rdr["ItemPhoto"].ToString();
+
+                    catalog.ItemStock = rdr["ItemStock"].ToString();
+                    catalog.ItemPrice = Convert.ToDecimal(rdr["ItemPrice"]);
+
+
+                    lstCatalog.Add(catalog);
+
+                }
+            }
+            return lstCatalog;
+
+        }
+
     }
 }

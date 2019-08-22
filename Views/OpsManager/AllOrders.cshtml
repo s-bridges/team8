@@ -1,114 +1,128 @@
-﻿@model IEnumerable<team8.Models.Order>
-
-
-
+﻿@model team8.Models.Order
 
 @{
     ViewData["Title"] = "Orders";
 }
 
 <h2>Orders</h2>
-<h4>All Orders </h4>
+<hr/>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="AllOrders">
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h4>Order Status</h4>
+            <div class="form-group">
+                <select asp-for="orderType" name="orderType">
+                    <option>- Please select status -</option>
+                    <option value="A">All Orders</option>
+                    <option value="'Pending'">Pending</option>
+                    <option value="'Received'">Received</option>
+                    <option value="'Processed'">Processed</option>
+                    <option value="'Completed'">Completed</option>
+                    <option value="'Shipped'">Shipped</option>
+                    <option value="'Closed Out'">Closed Out</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+
+        </form>
+    </div>
+    <hr/>
+</div>
 
 <div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrderID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CustomerID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CatalogID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.JobType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Media)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Total)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrderStatus)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PaymentType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CardID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalDue)
-                </th>
+    @if (Model._lstOrders != null)
+    {
+        @if (Model._lstOrders.Count() != 0)
+        {
+            <h4>Orders</h4>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CatalogID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.JobType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Media)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Content)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Total)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderStatus)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PaymentType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CardID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalDue)
-                    </td>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CustomerID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CatalogID)
+                        </th>
 
-                    <td>
-                        <div>
-                            <a asp-controller="OpsManager" asp-action="orderDetails" asp-route-OrderID="@item.OrderID">Details</a>
-                        </div>
-                        <div>
-                            <a asp-controller="OpsManager" asp-action="orderChangeStatus" asp-route-OrderID="@item.OrderID">Change Order Status</a>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <div>
-        <a asp-controller="OpsManager" asp-action="OrderByStatus">Return to Orders</a>
-    </div>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Total)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderStatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PaymentType)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalDue)
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model._lstOrders)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CatalogID)
+                            </td>
+                            <td>
+                                $@Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaymentType)
+                            </td>
+
+                            <td>
+                                $@Html.DisplayFor(modelItem => item.TotalDue)
+                            </td>
+
+                            <td>
+                                <div>
+                                    <a asp-controller="OpsManager" asp-action="orderDetails" asp-route-OrderID="@item.OrderID">Details</a>
+                                </div>
+                                <div>
+                                    <a asp-controller="OpsManager" asp-action="orderEdit" asp-route-OrderID="@item.OrderID">Edit</a>
+                                </div>
+                                <div>
+                                    <a asp-controller="OpsManager" asp-action="orderChangeStatus" asp-route-OrderID="@item.OrderID">Change Order Status</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>
+                <label>> No Matching Orders</label>
+            </p>
+        }
+
+    }
     <div>
         <a asp-controller="OpsManager" asp-action="Index">Return to My Account</a>
 

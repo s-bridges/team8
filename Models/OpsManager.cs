@@ -44,5 +44,6 @@ namespace team8.Models
         public string OpsManagerPassword { get; set; }
 
         public string userType { get; set; }
+        public string orderType { get; set; }
     }
 }

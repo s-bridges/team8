@@ -29,12 +29,20 @@ namespace team8.Controllers
             return View(ops);
         }
 
+
         //get for all users
         public IActionResult AllUsers()
         {
-            OpsManager ops = objOps.GetOpsManager(Convert.ToInt32(Session.OpsManagerID));
 
-            return View(ops);
+            AllUsers users = new AllUsers
+            {
+                _lstCustomers = objCustomer.GetAllCustomers().ToList(),
+                _lstEmployees = objEmployee.GetAllEmployees().ToList(),
+                _lstOps = objOps.GetAllOps().ToList()
+            };
+
+
+            return View(users);
         }
         //this is for all users 
         [HttpPost]
@@ -42,20 +50,43 @@ namespace team8.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (userType == null || userType == "C")
+                AllUsers users = new AllUsers();
+                if (userType == "A")
                 {
-                    return RedirectToAction("AllCustomer", "OpsManager");
 
+                    users._lstCustomers = objCustomer.GetAllCustomers().ToList();
+                    users._lstEmployees = objEmployee.GetAllEmployees().ToList();
+                    users._lstOps = objOps.GetAllOps().ToList();
+
+
+                    return View(users);
+                }
+                if (userType == "C")
+                {
+
+                    users._lstCustomers = objCustomer.GetAllCustomers().ToList();
+                    users._lstEmployees = null;
+                    users._lstOps = null;
+
+
+                    return View(users);
                 }
                 if (userType == "E")
                 {
-                    return RedirectToAction("AllEmployee", "OpsManager");
+                    users._lstEmployees = objEmployee.GetAllEmployees().ToList();
+                    users._lstCustomers = null;
+                    users._lstOps = null;
+
+                    return View(users);
 
                 }
                 if (userType == "O")
                 {
-                    return RedirectToAction("AllOps", "OpsManager");
+                    users._lstOps = objOps.GetAllOps().ToList();
+                    users._lstCustomers = null;
+                    users._lstEmployees = null;
 
+                    return View(users);
                 }
 
             }
@@ -83,17 +114,7 @@ namespace team8.Controllers
             return View(ops);
         }
 
-        //get all ops
-        [HttpGet]
-        public IActionResult AllOps()
-        {
 
-            List<OpsManager> lstOps = new List<OpsManager>();
-            lstOps = objOps.GetAllOps().ToList();
-
-            return View(lstOps);
-
-        }
 
 
         //edit ops manager 
@@ -178,16 +199,7 @@ namespace team8.Controllers
 
 
         //CUSTOMERS-------------------------------------------------------------------------------
-        //View
-        public IActionResult AllCustomer()
-        {
 
-            List<Customer> lstCustomer = new List<Customer>();
-            lstCustomer = objCustomer.GetAllCustomers().ToList();
-
-            return View(lstCustomer);
-
-        }
         //details
         [HttpGet]
         public IActionResult cDetails(int? CustomerID)
@@ -227,14 +239,14 @@ namespace team8.Controllers
         //confirm delete
         [HttpPost, ActionName("cDelete")]
         [ValidateAntiForgeryToken]
-        public IActionResult  DeleteCustomerConfirmed(int? CustomerID)
+        public IActionResult DeleteCustomerConfirmed(int? CustomerID)
         {
             objCustomer.DeleteCustomer(CustomerID);
-            return RedirectToAction("AllCustomer", "OpsManager");
+            return RedirectToAction("AllUsers", "OpsManager");
 
         }
 
-        
+
         //EMPLOYEES--------------------------------------------------------------------------------
         //All EMployees 
         public IActionResult AllEmployee()
@@ -264,6 +276,32 @@ namespace team8.Controllers
             return View(employee);
         }
 
+        //delete
+        [HttpGet]
+        public IActionResult EmployeeDelete(int? EmployeeID)
+        {
+            if (EmployeeID == null)
+            {
+                return NotFound();
+            }
+
+            Employee employee = objEmployee.GetEmployeeData(EmployeeID);
+
+            if (EmployeeID == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
+        }
+        //confirm delete
+        [HttpPost, ActionName("EmployeeDelete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteEmployeeConfirmed(int? EmployeeID)
+        {
+            objEmployee.DeleteEmployee(EmployeeID);
+            return RedirectToAction("AllUsers", "OpsManager");
+
+        }
 
         //create employee account
         // 
@@ -319,14 +357,16 @@ namespace team8.Controllers
 
         //ORDERS ----------------------------------------------------------------------------------
         //view all
+     
         public IActionResult AllOrders()
         {
-            List<Order> lstOrder = new List<Order>();
-            lstOrder = objOrder.GetAllOrder().ToList();
+            Order order = new Order();
+            order._lstOrders = objOrder.GetAllOrder().ToList();
 
-            if (lstOrder != null)
+
+            if (order._lstOrders != null)
             {
-                return View(lstOrder);
+                return View(order);
             }
 
             else
@@ -334,51 +374,30 @@ namespace team8.Controllers
                 return View();
             }
 
-        }
-
-        [HttpGet]
-        //orders by type ussed to show the status of each order
-        public IActionResult orderByStatus()
-        {
-            return View();
         }
         [HttpPost]
-        public IActionResult orderByStatus(string orderType)
+        public IActionResult AllOrders(string orderType)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                if (orderType == null || orderType == "A")
+                Order order = new Order();
+
+                if (orderType == "A")
                 {
-                    return RedirectToAction("AllOrders", "OpsManager");
-
+                    order._lstOrders = objOrder.GetAllOrder();
+                    return View(order);
                 }
-
                 else
                 {
-                    TempData["Status"] = orderType;
-                    return RedirectToAction("orderStatus", "OpsManager");
+                    order._lstOrders = objOrder.OrderStatus(orderType);
+                    return View(order);
                 }
-
             }
 
-            return RedirectToAction("Index");
+            return View();
+            
         }
-        [HttpGet]
-        public IActionResult orderStatus()
-        {
-            List<Order> lstOrder = new List<Order>();
-            lstOrder = objOrder.OrderStatus(TempData["Status"].ToString()).ToList();
 
-            if (lstOrder != null)
-            {
-                return View(lstOrder);
-            }
-
-            else
-            {
-                return View();
-            }
-        }
 
 
         //view one
@@ -399,6 +418,15 @@ namespace team8.Controllers
                 return NotFound();
             }
 
+            int CardID = order.CardID;
+            order.payment = objPayment.GetPaymentData(CardID);
+
+            int CatalogID = order.CatalogID;
+            order.catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            int CustomerID = order.CustomerID;
+            order.customer = objCustomer.GetCustomerData(CustomerID);
+
             return View(order);
         }
 
@@ -406,14 +434,14 @@ namespace team8.Controllers
         [HttpGet]
         public IActionResult cOrders(int CustomerID)
         {
-            List<Order> lstOrder = new List<Order>();
-            lstOrder = objOrder.GetAllCustomerOrder(CustomerID).ToList();
+            Order order = new Order();
+            order._lstOrders = objOrder.GetAllCustomerOrder(Convert.ToInt32(CustomerID));
 
-            if (lstOrder != null)
+            if (order._lstOrders != null)
             {
                 TempData["CustomerID"] = CustomerID;
 
-                return View(lstOrder);
+                return View(order);
             }
 
             else
@@ -421,6 +449,27 @@ namespace team8.Controllers
                 return View();
             }
 
+        }
+        [HttpPost]
+        public IActionResult cOrders(int CustomerID, string orderType)
+        {
+            if (ModelState.IsValid)
+            {
+                Order order = new Order();
+
+                if (orderType == "A")
+                {
+                    order._lstOrders = objOrder.GetAllCustomerOrder(Convert.ToInt32(CustomerID));
+                    return View(order);
+                }
+                else
+                {
+                    order._lstOrders = objOrder.CustomerOrderStatus(CustomerID, orderType);
+                    return View(order);
+                }
+            }
+
+            return View();
         }
 
         //edit an order 
@@ -433,10 +482,22 @@ namespace team8.Controllers
             }
 
             Order order = objOrder.GetOrderData(OrderID);
+
             if (order == null)
             {
                 return NotFound();
             }
+
+            int CardID = order.CardID;
+            order.payment = objPayment.GetPaymentData(CardID);
+
+            int CatalogID = order.CatalogID;
+            order.catalog = objCatalog.GetOrderCatalog(CatalogID);
+
+            int CustomerID = order.CustomerID;
+            order.customer = objCustomer.GetCustomerData(CustomerID);
+
+
             return View(order);
 
         }

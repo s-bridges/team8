@@ -42,6 +42,8 @@ namespace team8.Models
         public ICollection<Catalog> Catalog { get; set; }
 
         public string orderType { get; set; }
+
+        public IEnumerable<Order> _lstOrders { get; set; }
     }
 
 

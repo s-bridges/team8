@@ -8,27 +8,39 @@
 
 <h3>Welcome @Html.DisplayFor(model => model.EmployeeFirstName) </h3>
 
+<hr />
 
-<div>
-    <div>
-        <a asp-controller="Employee" asp-action="AllCustomers">View All Customers</a>
-    </div>
-    <div>
-        <a asp-controller="Employee" asp-action="AllOrders">View All Orders</a>
+<div class="row">
+    <div class="col-md-4">
+        <hr />
+        <h4>Customers</h4>
+        <div>
+            <a asp-controller="Employee" asp-action="AllCustomers">View Customers</a>
+        </div>
+        <hr />
+        <h4>Orders</h4>
+        <div>
+            <a asp-controller="Employee" asp-action="AllOrders">View Orders</a>
+        </div>
+        <hr />
+        <h4>Catalog</h4>
+        <div>
+            <a asp-controller="Employee" asp-action="Catalog">View Catalog</a>
+        </div>
+        <div>
+            <a asp-controller="Employee" asp-action="CatalogCreate">Create Catalog Entry</a>
+        </div>
+        <hr />
+        <h4>My Information</h4>
+        <div>
+            <a asp-controller="Employee" asp-action="EmployeeDetails" asp-route-EmployeeID="@Model.EmployeeID">My Information</a>
+        </div>
+        <div>
+            <a asp-controller="Employee" asp-action="EmployeeEdit" asp-route-EmployeeID="@Model.EmployeeID">Edit Information</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <div>
-        <a asp-controller="Employee" asp-action="Catalog">View Catalog</a>
-    </div>
-</div>
-
-<div>
-    <div>
-        <a asp-controller="Employee" asp-action="EmployeeDetails" asp-route-EmployeeID="@Model.EmployeeID">My Information</a>
-    </div>
-</div>
 
 
 @section Scripts {
